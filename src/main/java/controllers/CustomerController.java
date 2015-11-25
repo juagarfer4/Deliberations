@@ -367,8 +367,8 @@ public class CustomerController extends AbstractController {
 	
 	
 	
-	
-	@RequestMapping("loginFromCensusForm")
+	//TODO a servicio
+	@RequestMapping(value="loginFromCensusForm", method = RequestMethod.GET)
 	public ModelAndView loginFromCensusFrom(){
 		
 		
@@ -376,11 +376,11 @@ public class CustomerController extends AbstractController {
 		return new ModelAndView("customer/loginFromCensusForm");
 	}
 	
+	
 	public void loginMakeFromCensus(UserAccount user, HttpServletRequest request){
 		
 		  try {
 	            // Must be called from request filtered by Spring Security, otherwise SecurityContextHolder is not updated
-	            Md5PasswordEncoder md5=new Md5PasswordEncoder();
 	        	System.out.println(request.toString());
 	        	System.out.println("contraseña pepe de base de datos: "+user.getPassword());
 	            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword(), null);
@@ -394,29 +394,16 @@ public class CustomerController extends AbstractController {
 	            e.printStackTrace();
 	            SecurityContextHolder.getContext().setAuthentication(null);
 	        }
-			
-			
-		
-		
 	}
 	
 	@RequestMapping("/loginMake")
 	public ModelAndView loginMake(@Valid UserAccount user, BindingResult bindingResult, HttpServletRequest request){
-		
-		
-		
 		ModelAndView result=null;
 		
 		if(bindingResult.hasErrors()){
-			
-			
 			result=login();
 			System.out.println(bindingResult.toString());
-			
 		}
-		
-		
-		
 		//primero, debemos ver si esta logeado en el sistema mediante el token
 		ObjectMapper objectMapper=new ObjectMapper();
 
@@ -434,26 +421,15 @@ public class CustomerController extends AbstractController {
 			System.out.println("el resultado de autenticación es: "+resultOfToken.isValid());
 			
 		} catch (JsonParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (JsonMappingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-
 		if(resultOfToken.isValid()){//el usuario esta logueado en autenticación, debemos de loguearlo aqui
-			
-			
-			
-			
-			
 			if(!(bindingResult.hasErrors()) || bindingResult==null){
 				Md5PasswordEncoder md5=new Md5PasswordEncoder();
 				//System.out.println("password encodeado de customer: "+md5.encodePassword(user.getPassword(), null));
@@ -467,8 +443,7 @@ public class CustomerController extends AbstractController {
 				}catch( Exception e){
 					System.out.println(e.toString());
 					//no esta en la base de datos, lo creamos en entonces:
-					
-					
+
 					User user2 = new User();
 					UserAccount userAccount=new UserAccount();
 					Authority a=new Authority();
@@ -487,11 +462,6 @@ public class CustomerController extends AbstractController {
 					user2.setThreads(new ArrayList<Hilo>());
 					
 					userService.save(user2);
-					
-					
-					
-					
-					
 					
 				}
 
@@ -580,16 +550,12 @@ public class CustomerController extends AbstractController {
 			System.out.println("el resultado de autenticación es: "+resultOfToken.isValid());
 			
 		} catch (JsonParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (JsonMappingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -696,18 +662,16 @@ public class CustomerController extends AbstractController {
 	
 	
 	
+	// Ancillary methods ----------------------------------------------------------------------
 	
-	private ModelAndView createEditModelAndView(domain.Hilo thread){
-		
-		
-		return createEditModelAndView(thread, null);
+	private ModelAndView createEditModelAndView(Hilo thread){
+		ModelAndView result;
+		result = createEditModelAndView(thread, null);
+		return result;
 	}
 	
-	private ModelAndView createEditModelAndView(domain.Hilo thread, String message){
-		
-		
+	private ModelAndView createEditModelAndView(Hilo thread, String message){
 		ModelAndView result;
-		
 		
 		if(thread.getUser()==null){//NUEVO
 			
@@ -718,26 +682,15 @@ public class CustomerController extends AbstractController {
 			result.addObject("thread", thread);			
 			
 		}else{
-			
-			
 			User user=thread.getUser();
 			
 			result=new ModelAndView("customer/editThread");
 			
 			result.addObject("thread", thread);
 			result.addObject("user", user);
-			
-			
-			
 		}
 		
-		
 		return result;
-		
-		
-		
-		
-		
 	}
 	
 
