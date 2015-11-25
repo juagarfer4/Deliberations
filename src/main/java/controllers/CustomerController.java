@@ -483,7 +483,7 @@ public class CustomerController extends AbstractController {
 		ObjectMapper objectMapper=new ObjectMapper();
 
 		Token resultOfToken=new Token();
-		//para generar el token se envia el password con md5
+		//para generar el token se envia el password con MD5
 		String passwordMd5=new Md5PasswordEncoder().encodePassword(user.getPassword(), null);
 		//depues se vuelve a calcular el md5 del password + nombre de usario antes
 		passwordMd5=user.getUsername()+new Md5PasswordEncoder().encodePassword(passwordMd5, null);
