@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -41,17 +40,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.CensusUser;
-import domain.Comment;
-import domain.Hilo;
-import domain.Token;
-import domain.User;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.CommentService;
 import services.ThreadService;
 import services.UserService;
+import domain.CensusUser;
+import domain.Comment;
+import domain.Hilo;
+import domain.Token;
+import domain.User;
 
 
 @Controller
@@ -146,8 +145,6 @@ public class CustomerController extends AbstractController {
 		return result;
 	}
 	
-	
-	// Creation ------------------------------------------------------------------------
 	
 	@RequestMapping("/createThread")
 	public ModelAndView createThread(){
