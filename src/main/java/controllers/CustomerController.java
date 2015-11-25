@@ -37,6 +37,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,77 +72,55 @@ public class CustomerController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------		
-
-	@RequestMapping("/action-1")
-	public ModelAndView action1() {
-		ModelAndView result;
-
-		result = new ModelAndView("customer/action-1");
-
-		return result;
-	}
+	// Listing ------------------------------------------------------------------
 	
-	// Action-2 ---------------------------------------------------------------		
-
-	@RequestMapping("/action-2")
-	public ModelAndView action2() {
-		ModelAndView result;
-
-		result = new ModelAndView("customer/action-2");
-
-		return result;
-	}
-	
-	
-	
-	@RequestMapping("/listThreads")
+	@RequestMapping(value="/listThreads", method= RequestMethod.GET)
 	public ModelAndView prueba(){
-		
-		
+		//creacion de variables
 		ModelAndView result;
-		
-		Collection<domain.Hilo> threads;
+		Collection<Hilo> threads;
+		//asignacion de valores
 		threads=threadService.findAll();
-		
-		
 		result=new ModelAndView("customer/listThreads");
 		result.addObject("threads",threads);
+		//mostrar resultado
 		return result;
 		
-		
 	}
 	
+	// Displaying ---------------------------------------------------------
 	
-	@RequestMapping("/seeThread")
+	@RequestMapping(value = "/seeThread", method = RequestMethod.GET)
 	public ModelAndView seeThread(@RequestParam int id){
+		ModelAndView result;
+		Hilo hilo;
+			
+		hilo=threadService.findOne(id);
+		result =new ModelAndView("customer/seeThread");
+		result.addObject("hilo",hilo);
+		result.addObject("comments",hilo.getComments());
 		
+		Comment comment=new Comment();
 		
-	Hilo hilo=threadService.findOne(id);
-	ModelAndView result =new ModelAndView("customer/seeThread");
-	result.addObject("hilo",hilo);
-	result.addObject("comments",hilo.getComments());
-	
-	Comment comment=new Comment();
-	
-	comment.setCreationMoment(new Date());
-	comment.setThread(hilo);
-	comment.setUser(userService.findByPrincipal());
-	result.addObject("comment", comment);
-	//devuelve hilo mas sus comentarios
-	return result;
-		
+		comment.setCreationMoment(new Date());
+		comment.setThread(hilo);
+		comment.setUser(userService.findByPrincipal());
+		result.addObject("comment", comment);
+		//devuelve hilo mas sus comentarios
+		return result;
+			
 		
 		
 	}
-
-	@RequestMapping("/saveComment")
+	
+	// Creation --------------------------------------------------------------------------
+	
+	@RequestMapping(value = "/saveComment", method = RequestMethod.POST)
 	public ModelAndView saveComment(@Valid Comment comment,BindingResult binding){
 		
 		ModelAndView result=new ModelAndView("redirect:listThreads.do");
 		
 		if(binding.hasErrors()){
-			
 			
 			result=seeThread(comment.getThread().getId());
 			System.out.println(binding.toString());
@@ -154,42 +133,36 @@ public class CustomerController extends AbstractController {
 			}catch(Throwable op){
 				result=seeThread(comment.getThread().getId());
 				op.printStackTrace();
-				
 			}
-			
 		}
-		
 		return result;
-		
-		
 	}
+	
+	
+	// Creation ------------------------------------------------------------------------
 	
 	@RequestMapping("/createThread")
 	public ModelAndView createThread(){
-		
 		
 		ModelAndView result=createEditModelAndView(new domain.Hilo());
 		
 		return result;
 		
-		
-		
-		
 	}
 	
-	@RequestMapping("/editThread")
+	// Edition ------------------------------------------------------------------------
+	
+	@RequestMapping(value = "/editThread", method = RequestMethod.GET)
 	public ModelAndView editThread(@RequestParam int id){
 		Hilo thread=threadService.findOne(id);
 		
 		ModelAndView result=createEditModelAndView(thread);
 		
 		return result;
-		
 	}
 	
-	@RequestMapping("/saveThread")
+	@RequestMapping(value = "/saveThread", method = RequestMethod.POST)
 	public ModelAndView saveThread(@ModelAttribute("thread") @Valid Hilo thread, BindingResult binding){
-		
 		
 		ModelAndView result=null;
 		if(binding.hasErrors()){
@@ -223,14 +196,14 @@ public class CustomerController extends AbstractController {
 		Hilo thread=threadService.findOne(id);
 		
 		
-		//to do
+		//TODO
 		
 		return new ModelAndView("customer/deleteThread");
 		
 	}
 	
 	//cookies from autenticate
-	
+	//TODO pasar a servicio
 	 public static String getCookieValue(String cookieName, HttpServletRequest request) {
 		    String value = null;
 		    Cookie[] cookies = request.getCookies();
@@ -251,7 +224,7 @@ public class CustomerController extends AbstractController {
 	
 	
 	
-	
+	//TODO para servicio
 	@RequestMapping("/login2")
 	public ModelAndView login( HttpServletRequest request){
 		
@@ -268,13 +241,9 @@ public class CustomerController extends AbstractController {
 		System.out.println(getCookieValue("token", request));
 		System.out.println("se deberían haber mostrado");
 		
-		
-		
 		return result; 
-		
-		
 	}
-	
+	//TODO a servicio
 	//Prueba control de cambios
 	@RequestMapping("/login")
 	public ModelAndView login(){
@@ -287,46 +256,14 @@ public class CustomerController extends AbstractController {
 		account.addAuthority(au);
 		result.addObject("account", account);
 		
-		
-		
-		
 		return result; 
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//login from autenticate
-	
-	
-	@RequestMapping("/loginFromAutenticate")
-	public ModelAndView loginFromAutentica(){
-		
-		
-		
-		//implementar
-		
-		return null;
-		
-		
-		
-		
 	}
 	
 	//login from census, this make a http get to census module and get the json output, after tries to make a login with json output
 	//if the person is no present in the bd, save the new person and log in the context.
 	//we are to trust the username census give us is unique
 	//if the person is present in the bd, log in the context
-
-	
-	
+	//TODO hacerlo bien, nueva funcionalidad
 	@RequestMapping("/loginFromCensus")
 	public ModelAndView loginFromCensus(String username, HttpServletRequest httpRequest) throws JsonParseException, JsonMappingException, IOException{
 		
