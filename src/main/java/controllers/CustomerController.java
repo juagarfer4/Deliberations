@@ -264,6 +264,7 @@ public class CustomerController extends AbstractController {
 	//we are to trust the username census give us is unique
 	//if the person is present in the bd, log in the context
 	//TODO hacerlo bien, nueva funcionalidad
+	//comentaraio para fran
 	@RequestMapping("/loginFromCensus")
 	public ModelAndView loginFromCensus(String username, HttpServletRequest httpRequest) throws JsonParseException, JsonMappingException, IOException{
 		
