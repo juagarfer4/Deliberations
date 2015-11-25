@@ -78,7 +78,7 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 	
-	public static String getCookieValue(String cookieName, HttpServletRequest request) {
+	public String getCookieValue(String cookieName, HttpServletRequest request) {
 	    String value = null;
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
