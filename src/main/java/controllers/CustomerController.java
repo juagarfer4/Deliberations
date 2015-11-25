@@ -58,13 +58,22 @@ import services.UserService;
 @RequestMapping("/customer")
 public class CustomerController extends AbstractController {
 	
-	@Autowired ThreadService threadService;
-	@Autowired UserService userService;
-	@Autowired CommentService commentService;
-	@Autowired LoginService loginService;
-	@Autowired UserDetailsService userDetailsService;
+	// Supporting services -----------------------
 	
+	@Autowired
+	private ThreadService threadService;
 	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
+	private LoginService loginService;
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -85,7 +94,6 @@ public class CustomerController extends AbstractController {
 		result.addObject("threads",threads);
 		//mostrar resultado
 		return result;
-		
 	}
 	
 	// Displaying ---------------------------------------------------------
@@ -104,7 +112,7 @@ public class CustomerController extends AbstractController {
 		
 		comment.setCreationMoment(new Date());
 		comment.setThread(hilo);
-		comment.setUser(userService.findByPrincipal());
+		comment.setUser(userService.findUserByPrincipal());
 		result.addObject("comment", comment);
 		//devuelve hilo mas sus comentarios
 		return result;
@@ -203,46 +211,35 @@ public class CustomerController extends AbstractController {
 	}
 	
 	//cookies from autenticate
-	//TODO pasar a servicio
-	 public static String getCookieValue(String cookieName, HttpServletRequest request) {
-		    String value = null;
-		    Cookie[] cookies = request.getCookies();
-		    if (cookies != null) {
-		      int i = 0;
-		      boolean cookieExists = false;
-		      while (!cookieExists && i < cookies.length) {
-		        if (cookies[i].getName().equals(cookieName)) {
-		          cookieExists = true;
-		          value = cookies[i].getValue();
-		        } else {
-		          i++;
-		        }
-		      }
-		    }
+	 public String getCookieValue(String cookieName, HttpServletRequest request) {
+		    String value;
+		    
+		    value = userService.getCookieValue(cookieName, request);
+		    
 		    return value;
-		  }
+	 }
 	
 	
 	
-	//TODO para servicio
-	@RequestMapping("/login2")
-	public ModelAndView login( HttpServletRequest request){
-		
-		ModelAndView result=new ModelAndView("customer/login");
-		
-		UserAccount account=new UserAccount();
-		Authority au=new Authority();
-		au.setAuthority("CUSTOMER");
-		account.addAuthority(au);
-		result.addObject("account", account);
-		//PRUEBA DE COOKIES FROM AUTENTICATE
-		
-		System.out.println(getCookieValue("user", request));
-		System.out.println(getCookieValue("token", request));
-		System.out.println("se deberían haber mostrado");
-		
-		return result; 
-	}
+//	//TODO para servicio
+//	@RequestMapping("/login2")
+//	public ModelAndView login( HttpServletRequest request){
+//		
+//		ModelAndView result=new ModelAndView("customer/login");
+//		
+//		UserAccount account=new UserAccount();
+//		Authority au=new Authority();
+//		au.setAuthority("CUSTOMER");
+//		account.addAuthority(au);
+//		result.addObject("account", account);
+//		//PRUEBA DE COOKIES FROM AUTENTICATE
+//		
+//		System.out.println(getCookieValue("user", request));
+//		System.out.println(getCookieValue("token", request));
+//		System.out.println("se deberían haber mostrado");
+//		
+//		return result; 
+//	}
 	//TODO a servicio
 	//Prueba control de cambios
 	@RequestMapping("/login")
@@ -264,7 +261,6 @@ public class CustomerController extends AbstractController {
 	//we are to trust the username census give us is unique
 	//if the person is present in the bd, log in the context
 	//TODO hacerlo bien, nueva funcionalidad
-	//comentaraio para fran
 	@RequestMapping("/loginFromCensus")
 	public ModelAndView loginFromCensus(String username, HttpServletRequest httpRequest) throws JsonParseException, JsonMappingException, IOException{
 		
@@ -273,14 +269,15 @@ public class CustomerController extends AbstractController {
 		
 		System.out.println(username);
 		
-		//find in the census with json
+		// Encontrar en Censos con JSon
 		
 		ObjectMapper objectMapper=new ObjectMapper();
 		
-	//	Document doc=Jsoup.connect("http://localhost:8080/ADMCensus/census/json_one_user.do?votacion_id=1&username="+username).get();
+		//Document doc=Jsoup.connect("http://localhost:8080/ADMCensus/census/json_one_user.do?votacion_id=1&username="+username).get();
 		//System.out.println(doc.toString());
 		
-		//si  da error, es que el usuario no esta en el censo
+		// Si da error, el usuario no está en el censo
+		
 		CensusUser censusUser=null;
 		String nameFinal = "";
 		try{
@@ -311,69 +308,42 @@ public class CustomerController extends AbstractController {
 			return loginFromCensusFrom();
 		}
 		
-		
-		//si no, procedemos
-		
-		
-			
+		// Si no, adelante
 		
 		if(nameFinal.equals("")){
 			
 			return loginFromCensusFrom();
-		}else if(userService.findByUsername(nameFinal)!=null){//esta en la base de datos
+		}else if(userService.findUserByUsername(nameFinal)!=null){//esta en la base de datos
 			
+			// Login
 			
-			//nos marcamos el login
-			loginMakeFromCensus(userService.findByUsername(username).getUserAccount(), httpRequest);
+			loginMakeFromCensus(userService.findUserByUsername(username).getUserAccount(), httpRequest);
 			
 			result=new ModelAndView("customer/listThreads");
 			
 			
-		}else{// no esta, lo registramos
+		}else{ // Al no estar, se le registra
+			User user;
+			UserAccount userAccount;
 			
-			
-			User user = new User();
-			UserAccount userAccount=new UserAccount();
-			Authority a=new Authority();
-			a.setAuthority("CUSTOMER");
-			userAccount.setUsername(username);
-			userAccount.setPassword(new Md5PasswordEncoder().encodePassword(username, null));
-			userAccount.addAuthority(a);
-			user.setName(username);
-			user.setUserAccount(userAccount);
-			user.setBanned(false);
-			user.setEmail("user@mail");
-			user.setLocation("location2");
-			user.setNumberOfMessages(0);
-			user.setSurname("usernameSurnam");
-			user.setComments(new ArrayList<Comment>());
-			user.setThreads(new ArrayList<Hilo>());
+			user = userService.create(username);
+			userAccount = user.getUserAccount();
 			
 			userService.save(user);
 			loginMakeFromCensus(userAccount, httpRequest);
 			
 			result=new ModelAndView("customer/listThreads");
-
-			
-			
 		}
-		
-		
-		
 		return result;
 	}
 	
-	
-	
-	
-	
-	//TODO a servicio
 	@RequestMapping(value="loginFromCensusForm", method = RequestMethod.GET)
 	public ModelAndView loginFromCensusFrom(){
+		ModelAndView result;
 		
+		result = new ModelAndView("customer/loginFromCensusForm");
 		
-		
-		return new ModelAndView("customer/loginFromCensusForm");
+		return result;
 	}
 	
 	
@@ -675,7 +645,7 @@ public class CustomerController extends AbstractController {
 		
 		if(thread.getUser()==null){//NUEVO
 			
-			thread.setUser(userService.findByPrincipal());
+			thread.setUser(userService.findUserByPrincipal());
 			thread.setCreationMoment(new Date());//necesario para la restricción de fecha de creación
 			result=new ModelAndView("customer/editThread");
 			result.addObject("user", thread.getUser());
@@ -708,7 +678,7 @@ public class CustomerController extends AbstractController {
 	@RequestMapping("/createThreadFromVotacion")
 	public ModelAndView createTreadFromVotacion(String name){
 		
-		User user=userService.findByUsername("customer");
+		User user=userService.findUserByUsername("customer");
 		
 		Hilo nuevo=new Hilo();
 		nuevo.setCreationMoment(new Date());
