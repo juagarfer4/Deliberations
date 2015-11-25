@@ -17,24 +17,22 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<spring:message code="customer.deliberations.title" var="title"></spring:message>
-<spring:message code="customer.deliberations.author" var="author"/>
-<spring:message code="customer.deliberations.date" var="date"/>
-<display:table name="threads" id="row"
-
-requestURI="customer/listThreads.do"
-pagesize="5" class="displaytag" >
 
 
-<display:column title="${title}">
+<form:form action="thread/save.do" method="post" modelAttribute="thread">
 
-<a href="customer/seeThread.do?id=${row.id }"><jstl:out value="${row.title }"></jstl:out></a>
-</display:column>
-<display:column title="${author }">
-<jstl:out value="${row.user.name }"></jstl:out>
-</display:column>
-<display:column title="${date }"><jstl:out value="${row.creationMoment }"></jstl:out></display:column>
+<form:hidden path="id"/>
+<form:hidden path="version"/>	
+<form:hidden path="user"/>
+<form:hidden path="creationMoment"/>
+<form:hidden path="comments"/>
 
- 
+<acme:textbox code="thread.title" path="title"/>
+<acme:textbox code="thread.text" path="text"/>
+<acme:submit name="save" code="thread.save"/>
 
-</display:table>
+
+
+
+
+</form:form>
