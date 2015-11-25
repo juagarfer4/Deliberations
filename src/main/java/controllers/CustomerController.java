@@ -492,7 +492,7 @@ public class CustomerController extends AbstractController {
 		String tokenToVerify=passwordMd5;
 		System.out.println("el token para comprobar es: "+tokenToVerify);
 		try {
-			resultOfToken = objectMapper.readValue(new URL("http://localhost/auth/api/checkToken?token="+tokenToVerify),domain.Token.class);
+			resultOfToken = objectMapper.readValue(new URL("http://deliberations.hol.es/auth/api/checkToken?token="+tokenToVerify),domain.Token.class);
 			System.out.println("el resultado de autenticación es: "+resultOfToken.isValid());
 			
 		} catch (JsonParseException e1) {
@@ -638,7 +638,7 @@ public class CustomerController extends AbstractController {
 		String tokenToVerify=passwordMd5;
 		System.out.println("el token para comprobar es: "+tokenToVerify);
 		try {
-			resultOfToken = objectMapper.readValue(new URL("http://localhost/auth/api/checkToken?token="+tokenToVerify),domain.Token.class);
+			resultOfToken = objectMapper.readValue(new URL("http://deliberations.hol.es/auth/api/checkToken?token="+tokenToVerify),domain.Token.class);
 			System.out.println("el resultado de autenticación es: "+resultOfToken.isValid());
 			
 		} catch (JsonParseException e1) {
