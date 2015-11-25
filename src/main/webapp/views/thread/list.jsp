@@ -18,26 +18,26 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-
-<display:table name="projects" id="row"
-
-requestURI="customer/ownItemList.do"
-pagesize="5" class="displaytag" >
+<display:table name="threads" id="row" requestURI="thread/list.do" pagesize="5" class="displaytag" >
 
 
-<spring:message code="project.title" var="title"></spring:message>
-<spring:message code="project.creationDate" var="creationDate" ></spring:message>
-<spring:message code="project.catJoint" var="catJoin"></spring:message>
+	<spring:message var="titleHeader" code="thread.title"/>
+	<display:column title="${titleHeader}" >
+		<a href="thread/display.do?id=${row.id }"> <spring:message code="thread.display"/> </a>
+	</display:column>
 
-<display:column title="${title }" ><jstl:out value="${row.title }"/></display:column>
-<display:column title="${creationDate }"><jstl:out value="${row.creationMoment }"/></display:column>
-<display:column title="${catJoin }">
-
-
-
-
-</display:column>
+	
+	<spring:message var="authorHeader" code="thread.author"/>
+	<display:column title="${authorHeader}" >
+		<jstl:out value="${row.user.name }"></jstl:out>
+	</display:column>
 
 
+	<spring:message var="dateHeader" code="thread.date"/>
+	<display:column title="${dateHeader}" >
+		<jstl:out value="${row.creationMoment}"></jstl:out>
+	</display:column>
+
+ 
 
 </display:table>
