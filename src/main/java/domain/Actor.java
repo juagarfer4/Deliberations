@@ -1,6 +1,5 @@
 
 package domain;
-import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -18,6 +17,15 @@ import security.UserAccount;
 @Access(AccessType.PROPERTY)
 public class Actor extends DomainEntity{
 	
+	
+	
+	// Constructors ------------------------------------------------------------
+	
+	public Actor() {
+		super();
+	}
+	
+	// Attributes -------------------------------------------------------------
 	private String name;
 	private String surname;
 	private String email;
@@ -26,7 +34,7 @@ public class Actor extends DomainEntity{
 	
 	
 	
-	//@NotBlank
+	@NotBlank
 	@SafeHtml
 	public String getName() {
 		return name;
@@ -34,7 +42,8 @@ public class Actor extends DomainEntity{
 	public void setName(String name) {
 		this.name = name;
 	}
-	//@NotBlank
+	
+	@NotBlank
 	@SafeHtml
 	public String getSurname() {
 		return surname;
@@ -42,7 +51,8 @@ public class Actor extends DomainEntity{
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	//@NotBlank
+	
+	@NotBlank
 	@SafeHtml
 	@Email
 	public String getEmail() {
@@ -51,7 +61,8 @@ public class Actor extends DomainEntity{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	//@NotBlank
+	
+	@NotBlank
 	@SafeHtml
 	public String getLocation() {
 		return location;
@@ -60,12 +71,12 @@ public class Actor extends DomainEntity{
 		this.location = location;
 	}
 	
-	//relationShips
+	// Relationships ----------------------------------------------------------
 	
 	UserAccount userAccount;
 	
-	@OneToOne(cascade=CascadeType.ALL)
 	@NotNull
+	@OneToOne(cascade=CascadeType.ALL, optional=false)
 	public UserAccount getUserAccount() {
 		return userAccount;
 	}
@@ -75,5 +86,10 @@ public class Actor extends DomainEntity{
 	
 	
 	
+	
+	
+		
+		
+
 	
 }

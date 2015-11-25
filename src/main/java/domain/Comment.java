@@ -18,10 +18,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Comment extends DomainEntity {
 
+	
+	// Constructors ------------------------------------------------------------
+	public Comment() {
+		super();
+	}
+
+	
+	// Attributes -------------------------------------------------------------
 	private String text;
 	private Date creationMoment;
-	
-	//prueba
 	
 	
 	@NotNull
@@ -34,6 +40,7 @@ public class Comment extends DomainEntity {
 		this.creationMoment = creationMoment;
 	}
 	
+	
 	@NotBlank
 	@SafeHtml
 	public String getText() {
@@ -42,10 +49,9 @@ public class Comment extends DomainEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
+
 	
-	//relationships
-	
-	
+	// Relationships ----------------------------------------------------------
 	private User user;
 	private Hilo thread;
 
@@ -65,9 +71,6 @@ public class Comment extends DomainEntity {
 	public void setThread(Hilo thread) {
 		this.thread = thread;
 	}
-	
-	
-	
 	
 	
 }
