@@ -18,7 +18,7 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="loginMake.do" method="post" modelAttribute="account">
+<form:form action="user/loginMake.do" method="post" modelAttribute="account">
 
 <form:hidden path="id"/>
 <form:hidden path="version"/>	

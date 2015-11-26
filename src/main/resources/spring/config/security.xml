@@ -50,7 +50,9 @@
 		<security:intercept-url pattern="/thread/save.do" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/thread/create.do" access="hasRole('USER')" /> 
 		<security:intercept-url pattern="/comment/save.do" access="hasRole('USER')" /> 
-		<security:intercept-url pattern="/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/user/loginMake.do" access="permitAll" />
+		<security:intercept-url pattern="/login.do" access="permitAll" />
+		<security:intercept-url pattern="/user/login.do" access="permitAll" />  
 		<security:intercept-url pattern="/login2.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/loginMake.do" access="permitAll" /> 
