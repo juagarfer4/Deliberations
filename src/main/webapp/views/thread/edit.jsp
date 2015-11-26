@@ -19,7 +19,7 @@
 
 
 
-<form:form action="thread/save.do" method="post" modelAttribute="thread">
+<form:form action="${actionURI}" modelAttribute="thread">
 
 <form:hidden path="id"/>
 <form:hidden path="version"/>	
