@@ -241,7 +241,6 @@ public class CustomerController extends AbstractController {
 	//Prueba control de cambios
 	@RequestMapping("/login")
 	public ModelAndView login(){
-		
 		ModelAndView result=new ModelAndView("customer/login");
 		
 		UserAccount account=new UserAccount();
