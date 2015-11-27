@@ -23,7 +23,7 @@
 
 	<spring:message var="titleHeader" code="thread.title"/>
 	<display:column title="${titleHeader}" >
-		<a href="thread/display.do?id=${row.id }"> <spring:message code="thread.display"/> </a>
+		<jstl:out value="${row.title }"></jstl:out>
 	</display:column>
 
 	
@@ -38,6 +38,9 @@
 		<jstl:out value="${row.creationMoment}"></jstl:out>
 	</display:column>
 
- 
+ 	<spring:message var="displayHeader" code="thread.display"/>
+	<display:column title="${displayHeader}" >
+		<a href="thread/display.do?id=${row.id}"> <spring:message code="thread.display"/> </a>
+	</display:column>
 
 </display:table>
