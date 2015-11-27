@@ -35,16 +35,16 @@
 				<ul>
 					<li class="arrow"></li>
 					
-					<li><a href="customer/listThreads.do"><spring:message code="master.page.customer.listThreads" /></a></li>		
-					<li><a href="customer/createThread.do"><spring:message code="master.page.customer.createThread" /></a></li>		
+					<li><a href="thread/list.do"><spring:message code="master.page.customer.listThreads" /></a></li>		
+					<li><a href="thread/create.do"><spring:message code="master.page.customer.createThread" /></a></li>		
 										
 				</ul>
 			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="customer/login.do"><spring:message code="master.page.login.A" /></a></li>
-			<li><a class="fNiv" href="customer/loginFromCensusForm.do"><spring:message code="master.page.login.C" /></a></li>
+			<li><a class="fNiv" href="user/login.do"><spring:message code="master.page.login.A" /></a></li>
+			<li><a class="fNiv" href="user/loginFromCensusForm.do"><spring:message code="master.page.login.C" /></a></li>
 			
 			
 			

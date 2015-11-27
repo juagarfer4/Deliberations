@@ -15,5 +15,24 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<p><spring:message code="customer.action.2" /></p>
+
+
+<form:form action="${actionURI}" method="post" modelAttribute="thread">
+
+<form:hidden path="id"/>
+<form:hidden path="version"/>
+<form:hidden path="user"/>	
+<form:hidden path="creationMoment"/>
+<form:hidden path="comments"/>
+
+<acme:textbox code="thread.title" path="title"/>
+<acme:textbox code="thread.text" path="text"/>
+<acme:submit name="save" code="thread.save"/>
+
+
+
+
+
+</form:form>

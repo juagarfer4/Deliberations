@@ -18,24 +18,26 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="customer/saveGroup.do" method="post" modelAttribute="groups">
-
-<form:hidden path="id"/>
-<form:hidden path="version"/>	
-<form:hidden path="administrator"/>
+<display:table name="threads" id="row" requestURI="thread/list.do" pagesize="5" class="displaytag" >
 
 
+	<spring:message var="titleHeader" code="thread.title"/>
+	<display:column title="${titleHeader}" >
+		<a href="thread/display.do?id=${row.id }"> <spring:message code="thread.display"/> </a>
+	</display:column>
+
+	
+	<spring:message var="authorHeader" code="thread.author"/>
+	<display:column title="${authorHeader}" >
+		<jstl:out value="${row.user.name }"></jstl:out>
+	</display:column>
 
 
+	<spring:message var="dateHeader" code="thread.date"/>
+	<display:column title="${dateHeader}" property="creationMoment" format="{0,date,dd/MM/yyyy HH:mm}">
+		<jstl:out value="${row.creationMoment}"></jstl:out>
+	</display:column>
 
-<acme:textbox code="administrator.name" path="name"/>
-<acme:textbox code="administrator.description" path="description"/>
+ 
 
-
-<acme:submit name="save" code="administrator.submit"/>
-
-
-
-
-
-</form:form>
+</display:table>
