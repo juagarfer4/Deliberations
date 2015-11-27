@@ -35,7 +35,6 @@ public class Hilo extends DomainEntity{
 	
 	
 	@NotBlank
-	@SafeHtml
 	public String getTitle() {
 		return title;
 	}

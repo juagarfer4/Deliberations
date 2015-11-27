@@ -34,7 +34,7 @@
 
 
 	<spring:message var="dateHeader" code="thread.date"/>
-	<display:column title="${dateHeader}" >
+	<display:column title="${dateHeader}" property="creationMoment" format="{0,date,dd/MM/yyyy HH:mm}">
 		<jstl:out value="${row.creationMoment}"></jstl:out>
 	</display:column>
 

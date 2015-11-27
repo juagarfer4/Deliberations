@@ -46,15 +46,17 @@ public class UserService {
 		List<Comment> comments;
 		
 		res = new User();
-		userAccount =new UserAccount();
+		userAccount = new UserAccount();
+		Collection<Authority> authorities = new ArrayList<Authority>();
 		authority = new Authority();
 		threads = new ArrayList<Hilo>();
 		comments = new ArrayList<Comment>();
 		
-		authority.setAuthority("CUSTOMER");
+		authority.setAuthority("USER");
+		authorities.add(authority);
 		userAccount.setUsername(username);
 		userAccount.setPassword(new Md5PasswordEncoder().encodePassword(username, null));
-		userAccount.addAuthority(authority);
+		userAccount.setAuthorities(authorities);
 		
 		res.setName(username);
 		res.setUserAccount(userAccount);
