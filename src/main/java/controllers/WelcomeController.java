@@ -69,7 +69,7 @@ public class WelcomeController extends AbstractController {
 		result.addObject("name", name);
 		result.addObject("moment", moment);
 		
-		//probando las cookie de autenticacíon 
+		//probando las cookie de autenticacíon ...
 		
 
 		return result;

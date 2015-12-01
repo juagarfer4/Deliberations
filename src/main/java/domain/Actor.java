@@ -34,8 +34,8 @@ public class Actor extends DomainEntity{
 	
 	
 	
-	@NotBlank
-	@SafeHtml
+//	@NotBlank
+//	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -43,8 +43,8 @@ public class Actor extends DomainEntity{
 		this.name = name;
 	}
 	
-	@NotBlank
-	@SafeHtml
+//	@NotBlank
+//	@SafeHtml
 	public String getSurname() {
 		return surname;
 	}
@@ -52,9 +52,9 @@ public class Actor extends DomainEntity{
 		this.surname = surname;
 	}
 	
-	@NotBlank
-	@SafeHtml
-	@Email
+//	@NotBlank
+//	@SafeHtml
+//	@Email
 	public String getEmail() {
 		return email;
 	}
@@ -62,8 +62,8 @@ public class Actor extends DomainEntity{
 		this.email = email;
 	}
 	
-	@NotBlank
-	@SafeHtml
+//	@NotBlank
+//	@SafeHtml
 	public String getLocation() {
 		return location;
 	}

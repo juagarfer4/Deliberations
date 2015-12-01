@@ -18,21 +18,18 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="customer/saveGroup.do" method="post" modelAttribute="groups">
+
+<form:form action="${actionURI}" method="post" modelAttribute="thread">
 
 <form:hidden path="id"/>
-<form:hidden path="version"/>	
-<form:hidden path="administrator"/>
+<form:hidden path="version"/>
+<form:hidden path="user"/>	
+<form:hidden path="creationMoment"/>
+<form:hidden path="comments"/>
 
-
-
-
-
-<acme:textbox code="administrator.name" path="name"/>
-<acme:textbox code="administrator.description" path="description"/>
-
-
-<acme:submit name="save" code="administrator.submit"/>
+<acme:textbox code="thread.title" path="title"/>
+<acme:textbox code="thread.text" path="text"/>
+<acme:submit name="save" code="thread.save"/>
 
 
 

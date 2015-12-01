@@ -26,7 +26,7 @@ public class User extends Actor{
 	
 	
 	
-	@NotNull
+//	@NotNull
 	public boolean isBanned() {
 		return banned;
 	}
@@ -34,7 +34,7 @@ public class User extends Actor{
 		this.banned = banned;
 	}
 	
-	@NotNull
+//	@NotNull
 	public int getNumberOfMessages() {
 		return numberOfMessages;
 	}
@@ -42,8 +42,8 @@ public class User extends Actor{
 		this.numberOfMessages = numberOfMessages;
 	}
 	
-	@SafeHtml
-	@NotBlank
+//	@SafeHtml
+//	@NotBlank
 	public String getUrl() {
 		return url;
 	}
