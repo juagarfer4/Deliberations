@@ -22,19 +22,6 @@
 </br>
 </br>
 
-<%-- <form:form action="customer/loginMake.do" method="post" modelAttribute="account"> --%>
-
-<%-- <form:hidden path="id"/> --%>
-<%-- <form:hidden path="version"/>	 --%>
-<%-- <acme:textbox code="customer.user" path="username"/> --%>
-<%-- <acme:password code="customer.pass" path="password"/> --%>
-<%-- <acme:submit name="save" code="customer.submit"/> --%>
-
-
-
-
-
-<%-- </form:form> --%>
 
 <div class="container">    
         
