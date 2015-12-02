@@ -13,8 +13,19 @@ import repositories.AdministratorRepository;
 @Service
 @Transactional
 public class AdministratorService {
+	
+	// Managed repository ----------------------
+	
 	@Autowired
 	private AdministratorRepository administratorRepository;
+	
+	// Constructors ---------------------
+	
+	public AdministratorService(){
+		super();
+	}
+	
+	// Simple CRUD methods ------------------------
 
 	public Collection<Administrator> findAll() {
 		return administratorRepository.findAll();
@@ -27,4 +38,7 @@ public class AdministratorService {
 	public Administrator save(Administrator administrator) {
 		return administratorRepository.save(administrator);
 	}
+	
+	// Other business methods -------------------
+	
 }

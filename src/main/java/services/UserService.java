@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import domain.Comment;
-import domain.Hilo;
+import domain.Thread;
 import domain.User;
 import repositories.UserRepository;
 import security.Authority;
@@ -25,10 +25,23 @@ import security.UserAccount;
 @Transactional
 public class UserService {
 	
+	// Managed repository ------------------
+	
 	@Autowired
 	private UserRepository userRepository;
+	
+	// Supporting services ----------------
+	
 	@Autowired
 	private LoginService loginService;
+	
+	// Constructors -------------------
+	
+	public UserService(){
+		super();
+	}
+	
+	// Simple CRUD methods -----------------
 
 	public Collection<User> findAll() {
 		return userRepository.findAll();
@@ -42,14 +55,14 @@ public class UserService {
 		User res;
 		UserAccount userAccount;
 		Authority authority;
-		List<Hilo> threads;
+		List<Thread> threads;
 		List<Comment> comments;
 		
 		res = new User();
 		userAccount = new UserAccount();
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		authority = new Authority();
-		threads = new ArrayList<Hilo>();
+		threads = new ArrayList<Thread>();
 		comments = new ArrayList<Comment>();
 		
 		authority.setAuthority("USER");
@@ -60,7 +73,7 @@ public class UserService {
 		
 		res.setName(username);
 		res.setUserAccount(userAccount);
-		res.setBanned(false);
+		res.setIsBanned(false);
 		res.setNumberOfMessages(0);
 		res.setComments(comments);
 		res.setThreads(threads);
@@ -71,6 +84,8 @@ public class UserService {
 	public User save(User user) {
 		return userRepository.save(user);
 	}
+	
+	// Other business methods ------------------------
 
 	public User findUserByPrincipal() {
 		return userRepository.findOneByPrincipal(loginService.getPrincipal().getId());

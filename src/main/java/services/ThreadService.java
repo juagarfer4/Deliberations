@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Comment;
-import domain.Hilo;
 import domain.User;
 import repositories.ThreadRepository;
 
+import domain.Thread;
 @Service
 @Transactional
 public class ThreadService {
@@ -24,6 +24,12 @@ public class ThreadService {
 	@Autowired
 	private ThreadRepository threadRepository;
 	
+	// Constructors ---------------------
+	
+	public ThreadService(){
+		super();
+	}
+	
 	// Supporting services --------------------
 	
 	@Autowired
@@ -31,13 +37,13 @@ public class ThreadService {
 	
 	// Simple CRUD methods ---------------------
 	
-	public Hilo create(){
-		Hilo result;
+	public Thread create(){
+		Thread result;
 		User user;
 		Date creationMoment;
 		Collection<Comment> comments;
 		
-		result = new Hilo();
+		result = new Thread();
 		user = userService.findUserByPrincipal();
 		creationMoment = new Date(System.currentTimeMillis()-1);
 		comments = new ArrayList<Comment>();
@@ -49,15 +55,15 @@ public class ThreadService {
 		return result;
 	}
 
-	public Collection<Hilo> findAll() {
+	public Collection<Thread> findAll() {
 		return threadRepository.findAll();
 	}
 
-	public Hilo findOne(Integer valueOf) {
+	public Thread findOne(Integer valueOf) {
 		return threadRepository.findOne(valueOf);
 	}
 
-	public Hilo save(Hilo thread) {
+	public Thread save(Thread thread) {
 		Assert.notNull(thread);
 		
 		Date creationMoment;
