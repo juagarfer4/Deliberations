@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -28,8 +29,10 @@ public class Comment extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private String text;
 	private Date creationMoment;
+	private Boolean erase;
+	private String reason;
 	
-	
+	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
@@ -49,11 +52,26 @@ public class Comment extends DomainEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
+		
+	@NotBlank
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 
-	
+	public Boolean getErase() {
+		return erase;
+	}
+	public void setErase(Boolean erase) {
+		this.erase = erase;
+	}
+
+
 	// Relationships ----------------------------------------------------------
 	private User user;
-	private Hilo thread;
+	private Thread thread;
 
 	@NotNull
 	@ManyToOne(optional=false)
@@ -65,10 +83,10 @@ public class Comment extends DomainEntity {
 	}
 	@NotNull
 	@ManyToOne(optional=false)
-	public Hilo getThread() {
+	public Thread getThread() {
 		return thread;
 	}
-	public void setThread(Hilo thread) {
+	public void setThread(Thread thread) {
 		this.thread = thread;
 	}
 	
