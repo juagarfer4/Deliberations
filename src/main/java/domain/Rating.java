@@ -49,8 +49,7 @@ public class Rating extends DomainEntity{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
 	@NotNull
 	@Valid
 	@ManyToOne(optional=false)
@@ -61,5 +60,4 @@ public class Rating extends DomainEntity{
 		this.thread = thread;
 	}
 
-	
 }
