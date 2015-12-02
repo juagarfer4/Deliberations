@@ -48,7 +48,7 @@ import services.ThreadService;
 import services.UserService;
 import domain.CensusUser;
 import domain.Comment;
-import domain.Hilo;
+import domain.Thread;
 import domain.Token;
 import domain.User;
 
@@ -454,7 +454,7 @@ public class UserController extends AbstractController {
 //					user2.setNumberOfMessages(0);
 //					user2.setSurname("usernameSurnam");
 //					user2.setComments(new ArrayList<Comment>());
-//					user2.setThreads(new ArrayList<Hilo>());
+//					user2.setThreads(new ArrayList<Thread>());
 //
 //					userService.save(user2);
 //
@@ -500,7 +500,7 @@ public class UserController extends AbstractController {
 
 	// Ancillary methods ----------------------------------------------------------------------
 
-	private ModelAndView createEditModelAndView(Hilo thread) {
+	private ModelAndView createEditModelAndView(Thread thread) {
 		ModelAndView result;
 		
 		result = createEditModelAndView(thread, null);
@@ -508,7 +508,7 @@ public class UserController extends AbstractController {
 		return result;
 	}
 
-	private ModelAndView createEditModelAndView(Hilo thread, String message) {
+	private ModelAndView createEditModelAndView(Thread thread, String message) {
 		ModelAndView result;
 
 		if (thread.getUser() == null) {// NUEVO
@@ -547,9 +547,9 @@ public class UserController extends AbstractController {
 
 		User user = userService.findUserByUsername("customer");
 
-		Hilo nuevo = new Hilo();
+		Thread nuevo = new Thread();
 		nuevo.setCreationMoment(new Date());
-		nuevo.setText("Hilo sobre la votación: " + name);
+		nuevo.setDecription("Thread sobre la votación: " + name);
 		nuevo.setUser(user);
 		nuevo.setTitle("Votación " + name);
 		nuevo.setComments(new ArrayList<Comment>());

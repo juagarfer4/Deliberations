@@ -48,7 +48,7 @@ import services.ThreadService;
 import services.UserService;
 import domain.CensusUser;
 import domain.Comment;
-import domain.Hilo;
+import domain.Thread;
 import domain.Token;
 import domain.User;
 
@@ -86,7 +86,7 @@ public class ThreadController extends AbstractController {
 	public ModelAndView prueba(){
 		//creacion de variables
 		ModelAndView result;
-		Collection<Hilo> threads;
+		Collection<Thread> threads;
 		//asignacion de valores
 		threads=threadService.findAll();
 		result=new ModelAndView("thread/list");
@@ -100,7 +100,7 @@ public class ThreadController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView seeThread(@RequestParam int id){
 		ModelAndView result;
-		Hilo hilo;
+		Thread hilo;
 			
 		hilo=threadService.findOne(id);
 		result =new ModelAndView("thread/display");
@@ -148,7 +148,7 @@ public class ThreadController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Hilo thread;
+		Thread thread;
 		
         thread  = threadService.create();
         result = new ModelAndView("thread/edit");
@@ -164,7 +164,7 @@ public class ThreadController extends AbstractController {
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int threadId){
-		Hilo thread=threadService.findOne(threadId);
+		Thread thread=threadService.findOne(threadId);
 		
 		ModelAndView result=createEditModelAndView(thread);
 		
@@ -172,7 +172,7 @@ public class ThreadController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Hilo thread, BindingResult binding){
+	public ModelAndView save(@Valid Thread thread, BindingResult binding){
 		ModelAndView result;
 		
 		if (binding.hasErrors()) {
@@ -195,7 +195,7 @@ public class ThreadController extends AbstractController {
 	public ModelAndView deleteThread(@RequestParam int id){
 		
 		
-		Hilo thread=threadService.findOne(id);
+		Thread thread=threadService.findOne(id);
 		
 		
 		//TODO
@@ -365,7 +365,7 @@ public class ThreadController extends AbstractController {
 	
 	// Ancillary methods ----------------------------------------------------------------------
 	
-	private ModelAndView createEditModelAndView(Hilo thread){
+	private ModelAndView createEditModelAndView(Thread thread){
 		ModelAndView result;
 		
 		result = createEditModelAndView(thread, null);
@@ -373,7 +373,7 @@ public class ThreadController extends AbstractController {
 		return result;
 	}
 	
-//	private ModelAndView createEditModelAndView(Hilo thread, String message){
+//	private ModelAndView createEditModelAndView(Thread thread, String message){
 //		ModelAndView result;
 //		
 //		if(thread.getUser()==null){//NUEVO
@@ -396,7 +396,7 @@ public class ThreadController extends AbstractController {
 //		return result;
 //	}
 	
-	public ModelAndView createEditModelAndView(Hilo thread, String message) {
+	public ModelAndView createEditModelAndView(Thread thread, String message) {
 		ModelAndView result;
 		
 		result = new ModelAndView("thread/edit");
@@ -424,9 +424,9 @@ public class ThreadController extends AbstractController {
 		
 		User user=userService.findUserByUsername("customer");
 		
-		Hilo nuevo=new Hilo();
+		Thread nuevo=new Thread();
 		nuevo.setCreationMoment(new Date());
-		nuevo.setText("Hilo sobre la votación: "+name);
+		nuevo.setDecription("Thread sobre la votación: "+name);
 		nuevo.setUser(user);
 		nuevo.setTitle("Votación "+name);
 		nuevo.setComments(new ArrayList<Comment>());

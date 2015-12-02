@@ -8,7 +8,7 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="decription/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -27,8 +27,8 @@
 <form:hidden path="creationMoment"/>
 <form:hidden path="comments"/>
 
-<acme:textbox code="thread.title" path="title"/>
-<acme:textbox code="thread.text" path="text"/>
+<acme:decriptionbox code="thread.title" path="title"/>
+<acme:decriptionbox code="thread.decription" path="decription"/>
 <acme:submit name="save" code="thread.save"/>
 
 

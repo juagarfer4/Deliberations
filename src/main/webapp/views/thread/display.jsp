@@ -8,7 +8,7 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="decription/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -30,9 +30,9 @@
 		<jstl:out value="${row.title}"></jstl:out>
 	</display:column>
 	
-	<spring:message var="textHeader" code="thread.text"/>
-	<display:column title="${textHeader}" >
-		<jstl:out value="${row.text}"></jstl:out>
+	<spring:message var="decriptionHeader" code="thread.decription"/>
+	<display:column title="${decriptionHeader}" >
+		<jstl:out value="${row.decription}"></jstl:out>
 	</display:column>
 	
 	<spring:message var="editHeader" code="thread.edit"/>
@@ -58,9 +58,9 @@
 		<jstl:out value="${row.user.name }"></jstl:out>
 	</display:column>
 	
-	<spring:message var="textHeader" code="thread.text"/>
-	<display:column title="${textHeader}" >
-		<jstl:out value="${row.text }"></jstl:out>
+	<spring:message var="decriptionHeader" code="thread.decription"/>
+	<display:column title="${decriptionHeader}" >
+		<jstl:out value="${row.decription }"></jstl:out>
 	</display:column>
 
 
@@ -79,7 +79,7 @@
 <form:hidden path="thread"/>
 
 
-<acme:textbox code="thread.comment" path="text"/>
+<acme:decriptionbox code="thread.comment" path="decription"/>
 <acme:submit name="save" code="comment.save"/>
 
 

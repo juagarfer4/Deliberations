@@ -40,7 +40,6 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import security.UserAccount;
 import domain.Comment;
-import domain.Hilo;
 import domain.Token;
 import domain.User;
 
