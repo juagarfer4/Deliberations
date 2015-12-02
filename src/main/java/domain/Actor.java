@@ -26,13 +26,11 @@ public class Actor extends DomainEntity{
 	}
 	
 	// Attributes -------------------------------------------------------------
+	
 	private String name;
 	private String surname;
 	private String email;
 	private String location;
-	//private String sex;
-	
-	
 	
 //	@NotBlank
 //	@SafeHtml
@@ -83,13 +81,5 @@ public class Actor extends DomainEntity{
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
-	
-	
-	
-	
-	
-		
-		
-
 	
 }

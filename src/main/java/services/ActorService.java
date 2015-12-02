@@ -13,6 +13,8 @@ import repositories.ActorRepository;
 @Service
 @Transactional
 public class ActorService {
+	
+	
 	@Autowired
 	private ActorRepository actorRepository;
 

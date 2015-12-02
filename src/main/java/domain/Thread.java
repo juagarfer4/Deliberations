@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -15,14 +16,14 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.test.annotation.Timed;
 @Entity
 @Access(AccessType.PROPERTY)
-public class Hilo extends DomainEntity{
+@Table(name="hilo")
+public class Thread extends DomainEntity{
 	
 	// Constructors ------------------------------------------------------------
 	
-		public Hilo() {
+		public Thread() {
 			super();
 		}
 		
