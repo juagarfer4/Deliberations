@@ -22,6 +22,19 @@
 </br>
 </br>
 
+<%-- <form:form action="customer/loginMake.do" method="post" modelAttribute="account"> --%>
+
+<%-- <form:hidden path="id"/> --%>
+<%-- <form:hidden path="version"/>	 --%>
+<%-- <acme:textbox code="customer.user" path="username"/> --%>
+<%-- <acme:password code="customer.pass" path="password"/> --%>
+<%-- <acme:submit name="save" code="customer.submit"/> --%>
+
+
+
+
+
+<%-- </form:form> --%>
 
 <div class="container">    
         
@@ -35,26 +48,27 @@
 
             <div class="panel-body" >
 
-                <form action="user/loginMake.do" id="form" class="form-horizontal"  method="post" modelAttribute="account">
-                   
+                <form:form action="user/loginMake.do" id="form" class="form-horizontal"  method="post" modelAttribute="account">
+                   		<form:hidden path="id"/>
+						<form:hidden path="version"/>	
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input code="customer.user" path="username" id="user" type="text" class="form-control"  placeholder="<spring:message code="login.user" />">                                        
+                        <form:input code="customer.user" path="username" id="user" class="form-control" />                                        
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input code="customer.password" path="password" id="password" type="password" class="form-control" placeholder="<spring:message code="login.password" />">
+                        <form:password code="customer.password" path="password" id="password" class="form-control" />
                     </div>                                                                  
 
                     <div class="form-group">
                         <!-- Button -->
                         <div class="col-sm-12 controls">
-                            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> <spring:message code="login.login" /></button>                          
+                            <button type="submit" name="save" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> <spring:message code="login.login" /></button>                          
                         </div>
                     </div>
 
-                </form>     
+                </form:form>     
 
             </div>                     
         </div>  
