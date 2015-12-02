@@ -6,18 +6,17 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Hilo;
-import services.HiloService;
+import domain.Rating;
+import services.RatingService;
 
 @Component
 @Transactional
-public class StringToHiloConverter implements Converter<String, Hilo> {
-	
+public class StringToRatingConverter implements Converter<String, Rating> {
 	@Autowired
-	private HiloService hiloService;
+	private RatingService ratingService;
 
-	@Override
-	public Hilo convert(String arg0) {
-		return hiloService.findOne(Integer.valueOf(arg0));
+	
+	public Rating convert(String arg0) {
+		return ratingService.findOne(Integer.valueOf(arg0));
 	}
 }
