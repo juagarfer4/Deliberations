@@ -9,7 +9,7 @@
  --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
-
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- <jsp:useBean id="date" class="java.util.Date" /> --%>
@@ -21,26 +21,24 @@
 		<div class="container">
 				<div class="col-md-4 contact-left">
 					
-					<h4>Address</h4>
+					<h4><spring:message code="footer.address" /></h4>
 					<address>
-						  795 Folsom Ave, Suite 600<br>
-						  San Francisco, CA 94107<br>
-						  <abbr title="Phone">P :</abbr> (123) 456-7890
+						  Escuela Técnica Superior de Ingeniería Informática - Universidad de Sevilla<br>
+						  Av. Reina Mercedes s/n, 41012 Sevilla<br>
+						 
 						</address>
 				</div>
 				<div class="col-md-4 contact-left">
 					
-					<h4>Phone/Fax</h4>
-					<p>Phone : +1234567890 </p>
-					<p>Phone : +1234567890 </p>
-					<p>Fax : +1234567890 </p>
+					<h4><spring:message code="footer.phone.fax" /></h4>
+					<p><spring:message code="footer.phone" />: +(34) 954556817</p>
+					
 				</div>
 				<div class="col-md-4 contact-left">
 					
-					<h4>Email</h4>
-					<p>Email-1 : <a href="mailto:info@example.com">info@mycompany.com</a> </p>
-					<p>Emai-2 : <a href="mailto:info@example.com">info@mycompany.com</a> </p>
-					<p>Email-3 : <a href="mailto:info@example.com">info@mycompany.com</a> </p>
+					<h4><spring:message code="footer.email" /></h4>
+					<p><spring:message code="footer.email" />: info-eii@listas@us.es</p>
+					
 				</div>
 				<div class="clearfix"></div>
 			
