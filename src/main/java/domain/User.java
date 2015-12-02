@@ -104,6 +104,7 @@ public class User extends DomainEntity{
 	private Collection<Thread> threads;
 	private Collection<Rating> ratings;
 	
+
 	@NotNull
 	@OneToOne(cascade=CascadeType.ALL, optional=false)
 	public UserAccount getUserAccount() {
@@ -138,8 +139,9 @@ public class User extends DomainEntity{
 	public Collection<Rating> getRatings() {
 		return ratings;
 	}
+
 	public void setRatings(Collection<Rating> ratings) {
 		this.ratings = ratings;
 	}
-	
+
 }
