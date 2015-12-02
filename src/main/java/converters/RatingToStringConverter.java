@@ -4,13 +4,13 @@ package converters;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import domain.Comment;
+import domain.Rating;
 
 @Component
 @Transactional
-public class CommentToStringConverter implements Converter<Comment, String> {
+public class RatingToStringConverter implements Converter<Rating, String> {
 	
-	public String convert(Comment arg0) {
+	public String convert(Rating arg0) {
 		return String.valueOf(arg0.getId());
 	}
 }

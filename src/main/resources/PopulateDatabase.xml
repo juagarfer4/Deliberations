@@ -76,7 +76,7 @@
 		</property>
 		<property name="ratings">
 		<list>	
-		
+		<ref bean="rating1" />
 		</list>
 		</property>		
 		<property name="comments">
@@ -126,7 +126,8 @@
 	</list>
 	</property>
 	<property name="ratings">	
-	<list>	
+	<list>
+	<ref bean="rating1" />	
 	</list>
 	</property>
 	</bean>
@@ -173,6 +174,13 @@
 	<property name="thread" ref="thread2" />		
 	</bean>
 	
+	<!-- Rating -->
+	
+	<bean id="rating1" class="domain.Rating">
+	<property name="rate" value="4"></property>
+	<property name="user" ref="user1"></property>
+	<property name="thread" ref="thread1" />		
+	</bean>
 	
 	
 </beans>
