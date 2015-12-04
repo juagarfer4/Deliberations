@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import domain.Comment;
+import domain.Rating;
 import domain.Thread;
 import domain.User;
 import repositories.UserRepository;
@@ -61,6 +61,7 @@ public class UserService {
 		Authority authority;
 		List<Thread> threads;
 		List<Comment> comments;
+		List<Rating> ratings;
 		
 		res = new User();
 		userAccount = new UserAccount();
@@ -68,6 +69,7 @@ public class UserService {
 		authority = new Authority();
 		threads = new ArrayList<Thread>();
 		comments = new ArrayList<Comment>();
+		ratings = new ArrayList<Rating>();
 		
 		authority.setAuthority("USER");
 		authorities.add(authority);
@@ -81,6 +83,7 @@ public class UserService {
 		res.setNumberOfMessages(0);
 		res.setComments(comments);
 		res.setThreads(threads);
+		res.setRatings(ratings);
 		
 		return res;
 	}
