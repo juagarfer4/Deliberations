@@ -44,11 +44,7 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
 		
-		<security:intercept-url pattern="/thread/list.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/thread/display.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/thread/edit.do" access="isAuthenticated()"/> 		
-		<security:intercept-url pattern="/thread/save.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/thread/create.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/thread/**.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/comment/save.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/user/loginMake.do" access="permitAll" />
 		<security:intercept-url pattern="/login.do" access="permitAll" />

@@ -8,217 +8,144 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-			<!-- banner -->
-<div class="banner">
-		<div class="container">
-			  <script src="js/responsiveslides.min.js"></script>
-  <script>
-    $(function () {
-      $("#slider").responsiveSlides({
-      	auto: true,
-      	nav: true,
-      	speed: 500,
-        namespace: "callbacks",
-        pager: true,
-      });
-    });
-  </script>
-			<div  id="top" class="callbacks_container">
-			<ul class="rslides" id="slider">
-			    <li>
-					
-						<div class="banner-text">
-							<h3>Lorem Ipsum is   </h3>
-						<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-						
-						</div>
-				
-				</li>
-				<li>
-					
-						<div class="banner-text">
-							<h3>There are many  </h3>
-						<p>Popular belief Contrary to , Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-												
+<br />
+<br />
+<div class="container">
 
-						</div>
-					
-				</li>
-				<li>
-						<div class="banner-text">
-							<h3>Sed ut perspiciatis</h3>
-						<p>Lorem Ipsum is not simply random text. Contrary to popular belief, It has roots in a piece of classical Latin literature from 45 BC.</p>
-								
-
-						</div>
-					
-				</li>
-			</ul>
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h1 class="featurette-heading">
+				Deliberaciones<span class="text-muted"></span>
+			</h1>
+			<p class="lead">Se trata de un subsistema open-source del
+				proyecto Agora@US que introduce la funcionalidad de foro para
+				administrar hilos y mensajes de usuarios votantes.</p>
 		</div>
+		<div class="col-md-5">
+			<img src="images/group.png"
+				class="featurette-image img-responsive center-block"
+				data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+		</div>
+	</div>
 
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7 col-md-push-5">
+			<h2 class="featurette-heading">
+				Agora@US<span class="text-muted"></span>
+			</h2>
+			<p class="lead">Es el proyecto de la asignatura de Evaluación y
+				Gestión de la Configuración (EGC) que nace a partir de AgoraVoting,
+				un proyecto open-source que pretende dinamizar el proceso de
+				votación de manera telemática.</p>
+		</div>
+		<div class="col-md-5 col-md-pull-7">
+			<img src="images/group.png"
+				class="featurette-image img-responsive center-block"
+				data-src="holder.js/500x500/auto" alt="Grupo EGC">
+		</div>
 	</div>
-	</div>
-<!-- banner -->
-<!-- sha -->
-	<div class="sha">
-	</div>
-<!-- sha -->
+	<br />
+</div>
+
 <!-- welcome -->
-	<div class="welcome">
-		<div class="container">
-			<h2>Welcome</h2>
-			<p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
-		</div>
-	</div>
-<!-- welcome -->
-<!-- welcome-btm -->
-	<div class="welcome-btm">
-		<div class="container">
-			<div class="col-md-4 welcome-left">
-				<h3>5</h3>
-				<ul class="wel">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-						<div class="clearfix"></div>
-				</ul>
-				<h5>DESIGN</h5>
-			</div>
-			<div class="col-md-4 welcome-left">
-				<h3>4</h3>
-				<ul class="wel">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#" class="wht"></a></li>
-						<div class="clearfix"></div>
-				</ul>
-				<h5>MATERIAL</h5>
-			</div>
-			<div class="col-md-4 welcome-left">
-				<h3>4</h3>
-				<ul class="wel">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#" class="wht"></a></li>
-						<div class="clearfix"></div>
-				</ul>
-				<h5>USABILITY</h5>
-			</div>
-				<div class="clearfix"></div>
-			<div class="wel-top">
-				<div class="col-md-6 welcome-left1">
-					<h3>4</h3>
-				<ul class="wel">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#" class="wht"></a></li>
-						<div class="clearfix"></div>
-				</ul>
-				<h5>WORTHWHILE</h5>
-				</div>
-				<div class="col-md-6 welcome-left1">
-					<h3>4.<span>25</span></h3>
-				<ul class="wel">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#" class="wht"></a></li>
-						<div class="clearfix"></div>
-				</ul>
-				<h5>AVERAGE</h5>
-				</div>
-					<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-<!-- welcome-btm -->
+<!-- <div class="welcome"> -->
+<!-- <div class="container"> -->
+<!-- 		<h2>Deliberaciones Agora@US 15-16</h2> -->
+<!-- 		<p> -->
+<!-- 			Deliberaciones es un subsistema de código abierto del proyecto -->
+<!-- 			Agora@US que introduce la funcionalidad de un foro para administrar -->
+<!-- 			hilos y mensajes de usuarios votantes. <br /> Dichos mensajes -->
+<!-- 			contendrán información sobre el votante que los haya realizado. Sólo -->
+<!-- 			los votantes válidos podrán realizar comentarios, por lo que se -->
+<!-- 			deberá consultar al sistema de autenticación. <br /> -->
+<!-- 			<br /> -->
+<!-- 		</p> -->
+
+<!-- </div> -->
+<!-- </div> -->
+<!-- <!-- welcome -->
+
 <!-- why -->
-	<div class="why">
-		<div class="container">
-			<span class="glyphicon glyphicon-globe" aria-hidden="true"></span><h4>velit esse quam nihil molestiae consequatur</h4>
-			<p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
-			<ul class="ch-grid">
-						<li>
-							<div class="ch-item ch-img-1">
-								<div class="ch-info">
-									<h3>Industrier</h3>
-									<p>by Daniel Nyari <a href="#">View on Dribbble</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="ch-item ch-img-2">
-								<div class="ch-info">
-									<h3>Industrier</h3>
-									<p>by Daniel Nyari <a href="#">View on Dribbble</a></p>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="ch-item ch-img-3">
-								<div class="ch-info">
-									<h3>Industrier</h3>
-									<p>by Daniel Nyari <a href="#">View on Dribbble</a></p>
-								</div>
-							</div>
-						</li>
-					</ul>
-		</div>
-	</div>
+<div class="why">
+	<h2>
+		<p class="lead">
+		<center>Nuestro equipo de trabajo y los roles que asumimos</center>
+		</p>
+	</h2>
+	<ul class="ch-grid">
+		<li>
+			<div class="ch-item ch-img-1">
+				<div class="ch-info">
+					<h3>Integración</h3>
+					<p>
+						Juan García Orozco <a href="#">juagaroro@alum.us.es</a>
+					</p>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="ch-item ch-img-2">
+				<div class="ch-info">
+					<h3>Coordinador</h3>
+					<p>
+						Juan García-Quismondo Fernández <a href="#">juagarfer4@alum.us.es</a>
+					</p>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="ch-item ch-img-3">
+				<div class="ch-info">
+					<h3>Analista</h3>
+					<p>
+						Roberto Jiménez Castillo <a href="#">robjimcas@alum.us.es</a>
+					</p>
+				</div>
+			</div>
+		</li>
+		<br />
+		<li>
+			<div class="ch-item ch-img-4">
+				<div class="ch-info">
+					<h3>Diseño</h3>
+					<p>
+						Francisco José Macías García <a href="#">framacgar2@alum.us.es</a>
+					</p>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="ch-item ch-img-5">
+				<div class="ch-info">
+					<h3>Desarrollador</h3>
+					<p>
+						Alfredo Menéndez Charlo <a href="#">alfmencha@alum.us.es</a>
+					</p>
+				</div>
+			</div>
+		</li>
+		<li>
+			<div class="ch-item ch-img-6">
+				<div class="ch-info">
+					<h3>Gestor documental</h3>
+					<p>
+						Rubén Ramírez Vera <a href="#">rubramver@alum.us.es</a>
+					</p>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
 <!-- why -->
-<!--  majority -->
-	<div class="majority">
-		<div class="container">
-			<h3>when an unknown printer took a galley of type and scrambled it.</h3>
-			<div class="col-md-3  majority-left">
-				<img src="images/54.jpg" alt=" " class="img-responsive" />
-					<h4>Readable content</h4>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-			</div>
-			<div class="col-md-3  majority-left">
-				<img src="images/55.jpg" alt=" " class="img-responsive" />
-				<h4>Omnis iste</h4>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					
-			</div>
-			<div class="col-md-3  majority-left">
-				<img src="images/56.jpg" alt=" " class="img-responsive" />
-				<h4>Natus error</h4>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					
-			</div>
-			<div class="col-md-3  majority-left">
-				<img src="images/57.jpg" alt=" " class="img-responsive" />
-				<h4>Iste natus</h4>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					<li><a href="#">Lorem Ipsum is that</a></li>
-					
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	</div>
-<!--  majority -->

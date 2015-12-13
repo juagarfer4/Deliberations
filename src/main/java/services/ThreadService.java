@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,46 @@ public class ThreadService {
 
 	public Hilo findOne(Integer valueOf) {
 		return threadRepository.findOne(valueOf);
+	}
+	
+	public List<Comment> findCommentsByPage(Integer valueOf, Integer p){
+		Hilo hilo;
+		Integer numberRows;
+		List<Comment> paginatedComments;
+		
+		hilo = findOne(valueOf);
+		numberRows = p*10;
+		paginatedComments = new ArrayList<Comment>();
+		
+		for(int i=numberRows-10; i<=hilo.getComments().size()-1; i++){
+			if(i < numberRows){
+				System.out.println((Comment) hilo.getComments().toArray()[i]);
+				paginatedComments.add((Comment) hilo.getComments().toArray()[i]);
+			}else{
+				break;
+			}
+		}
+		return paginatedComments;
+		
+	}
+	
+	public Integer calculateLastPage(Comment comment, Hilo hilo){
+		Double numberComments;
+		Double pageDouble;
+		Integer res;
+		
+		if(comment != null)
+			numberComments = (double) comment.getThread().getComments().size()+1;
+		else
+			numberComments = (double) hilo.getComments().size();
+		// Calcula qué pagina corresponde al mensaje recién creado, en decimal
+		pageDouble = numberComments/10;
+		// Se le aplica un redondeo siempre hacia arriba para el cálculo final de la página
+
+		res = (int) Math.ceil(pageDouble);
+		
+		return res;
+		
 	}
 
 	public Hilo save(Hilo thread) {

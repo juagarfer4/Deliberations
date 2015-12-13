@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -91,6 +92,7 @@ public class ThreadController extends AbstractController {
 		threads=threadService.findAll();
 		result=new ModelAndView("thread/list");
 		result.addObject("threads",threads);
+		result.addObject("allThreads",threadService.findAll());
 		//mostrar resultado
 		return result;
 	}
@@ -98,14 +100,21 @@ public class ThreadController extends AbstractController {
 	// Displaying ---------------------------------------------------------
 	
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView seeThread(@RequestParam int id){
+	public ModelAndView seeThread(@RequestParam int id, @RequestParam Integer p){
 		ModelAndView result;
 		Hilo hilo;
+		String hiloTitle;
+		Collection<Comment> comments;
+		Integer lastPage;
 			
 		hilo=threadService.findOne(id);
+		comments = threadService.findCommentsByPage(id, p);
+		hiloTitle = hilo.getTitle();
+		lastPage = threadService.calculateLastPage(null, hilo);
+		
 		result =new ModelAndView("thread/display");
 		result.addObject("hilo",hilo);
-		result.addObject("comments",hilo.getComments());
+		result.addObject("comments",comments);
 		
 		Comment comment=new Comment();
 		
@@ -113,6 +122,8 @@ public class ThreadController extends AbstractController {
 		comment.setThread(hilo);
 		comment.setUser(userService.findUserByPrincipal());
 		result.addObject("comment", comment);
+		result.addObject("p", p);
+		result.addObject("lastPage",lastPage);
 		//devuelve hilo mas sus comentarios
 		return result;
 			
@@ -123,22 +134,24 @@ public class ThreadController extends AbstractController {
 	// Creation --------------------------------------------------------------------------
 	
 	@RequestMapping(value = "/saveComment", method = RequestMethod.POST)
-	public ModelAndView saveComment(@Valid Comment comment,BindingResult binding){
+	public ModelAndView saveComment(@Valid Comment comment, BindingResult binding){
 		
-		ModelAndView result=new ModelAndView("redirect:list.do");
+		ModelAndView result;
+		Integer page;
+		
+		page = threadService.calculateLastPage(comment, null);
+
+		result= new ModelAndView("redirect:display.do?id="+comment.getThread().getId()+"&p="+page+"");
 		
 		if(binding.hasErrors()){
 			
-			result=seeThread(comment.getThread().getId());
 			System.out.println(binding.toString());
 			
 		}else{
 			try{
 			commentService.save(comment);
-			result=seeThread(comment.getThread().getId());
 			//debemos comprobar si se guarda o no para guardar tambien el hilo
 			}catch(Throwable op){
-				result=seeThread(comment.getThread().getId());
 				op.printStackTrace();
 			}
 		}

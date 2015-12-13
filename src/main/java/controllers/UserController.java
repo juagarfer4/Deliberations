@@ -298,12 +298,14 @@ public class UserController extends AbstractController {
 		if (resultOfToken.isValid()) {// el usuario esta logueado en
 										// autenticación, debemos de loguearlo
 										// aqui
+			System.out.println("#0");
 			if (!(bindingResult.hasErrors()) || bindingResult == null) {
 				Md5PasswordEncoder md5 = new Md5PasswordEncoder();
 				// System.out.println("password encodeado de customer: "+md5.encodePassword(user.getPassword(),
 				// null));
 				// System.out.println("password de base de datos cust: "+userService.findByPrincipal());
 				try {
+					System.out.println("#1");
 					String passDB = loginService.loadUserByUsername(
 							user.getUsername()).getPassword();
 					String passForm = md5.encodePassword(user.getPassword(),
@@ -315,6 +317,7 @@ public class UserController extends AbstractController {
 							.getPassword()
 							.equals(md5.encodePassword(user.getPassword(), null)));
 				} catch (Exception e) {
+					System.out.println("#2");
 					System.out.println(e.toString());
 					// Si no está en la base de datos, se crea:
 
@@ -327,6 +330,7 @@ public class UserController extends AbstractController {
 				}
 
 				try {
+					System.out.println("#3");
 					// Must be called from request filtered by Spring Security,
 					// otherwise SecurityContextHolder is not updated
 
@@ -344,16 +348,17 @@ public class UserController extends AbstractController {
 					SecurityContextHolder.getContext().setAuthentication(
 							authentication);
 				} catch (Exception e) {
+					System.out.println("#4");
 					e.printStackTrace();
 					SecurityContextHolder.getContext().setAuthentication(null);
 				}
 
-				result = new ModelAndView("thread/list");
+				result = new ModelAndView("redirect:/");
 
 			}
 
 		} else { // Si no está logueado, se le reenvía de nuevo a la vista de logi
-
+			System.out.println("#5");
 //			result = login();
 			result = new ModelAndView("user/login");
 
