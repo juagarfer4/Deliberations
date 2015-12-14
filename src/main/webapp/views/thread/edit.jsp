@@ -55,8 +55,7 @@
 				<div class="form-group">
 					<div class="col-md-10">
 
-						<input type="submit" name="save" class="btn btn-primary"
-							code="thread.save" class="btn btn-default" style="float: right" />
+						<button type="submit" name="save" class="btn btn-primary" style="float: right"><spring:message code="thread.save" /></button>  
 					</div>
 				</div>
 

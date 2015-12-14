@@ -25,11 +25,9 @@
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h1 class="featurette-heading">
-				Deliberaciones<span class="text-muted"></span>
+				<spring:message code="welcome.title" /><span class="text-muted"></span>
 			</h1>
-			<p class="lead">Se trata de un subsistema open-source del
-				proyecto Agora@US que introduce la funcionalidad de foro para
-				administrar hilos y mensajes de usuarios votantes.</p>
+			<p class="lead"><spring:message code="welcome.intro" /></p>
 		</div>
 		<div class="col-md-5">
 			<img src="images/group.png"
@@ -45,10 +43,7 @@
 			<h2 class="featurette-heading">
 				Agora@US<span class="text-muted"></span>
 			</h2>
-			<p class="lead">Es el proyecto de la asignatura de Evaluación y
-				Gestión de la Configuración (EGC) que nace a partir de AgoraVoting,
-				un proyecto open-source que pretende dinamizar el proceso de
-				votación de manera telemática.</p>
+			<p class="lead"><spring:message code="welcome.second" /></p>
 		</div>
 		<div class="col-md-5 col-md-pull-7">
 			<img src="images/group.png"
@@ -81,14 +76,14 @@
 <div class="why">
 	<h2>
 		<p class="lead">
-		<center>Nuestro equipo de trabajo y los roles que asumimos</center>
+		<center><spring:message code="welcome.team" /></center>
 		</p>
 	</h2>
 	<ul class="ch-grid">
 		<li>
 			<div class="ch-item ch-img-1">
 				<div class="ch-info">
-					<h3>Integración</h3>
+					<h3><spring:message code="welcome.int" /></h3>
 					<p>
 						Juan García Orozco <a href="#">juagaroro@alum.us.es</a>
 					</p>
@@ -98,7 +93,7 @@
 		<li>
 			<div class="ch-item ch-img-2">
 				<div class="ch-info">
-					<h3>Coordinador</h3>
+					<h3><spring:message code="welcome.coo" /></h3>
 					<p>
 						Juan García-Quismondo Fernández <a href="#">juagarfer4@alum.us.es</a>
 					</p>
@@ -108,7 +103,7 @@
 		<li>
 			<div class="ch-item ch-img-3">
 				<div class="ch-info">
-					<h3>Analista</h3>
+					<h3><spring:message code="welcome.ana" /></h3>
 					<p>
 						Roberto Jiménez Castillo <a href="#">robjimcas@alum.us.es</a>
 					</p>
@@ -119,7 +114,7 @@
 		<li>
 			<div class="ch-item ch-img-4">
 				<div class="ch-info">
-					<h3>Diseño</h3>
+					<h3><spring:message code="welcome.dis" /></h3>
 					<p>
 						Francisco José Macías García <a href="#">framacgar2@alum.us.es</a>
 					</p>
@@ -129,7 +124,7 @@
 		<li>
 			<div class="ch-item ch-img-5">
 				<div class="ch-info">
-					<h3>Desarrollador</h3>
+					<h3><spring:message code="welcome.dev" /></h3>
 					<p>
 						Alfredo Menéndez Charlo <a href="#">alfmencha@alum.us.es</a>
 					</p>
@@ -139,7 +134,7 @@
 		<li>
 			<div class="ch-item ch-img-6">
 				<div class="ch-info">
-					<h3>Gestor documental</h3>
+					<h3><spring:message code="welcome.doc" /></h3>
 					<p>
 						Rubén Ramírez Vera <a href="#">rubramver@alum.us.es</a>
 					</p>

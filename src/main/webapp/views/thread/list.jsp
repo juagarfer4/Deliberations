@@ -27,12 +27,11 @@
 <br />
 <div class="container">
 
-	<h3>Temas en el foro: General</h3>
+	<h3><spring:message code="thread.head" /></h3>
 
 	<div id="create-button" style="text-align: right">
 		<a href="thread/create.do" class="btn btn-primary" role="button"><span
-			class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Nuevo
-			tema</a>
+			class="glyphicon glyphicon-pencil" aria-hidden="true"></span><spring:message code="list.new" /></a>
 	</div>
 <div class="table-responsive">
 	<display:table name="threads" id="row" requestURI="thread/list.do"

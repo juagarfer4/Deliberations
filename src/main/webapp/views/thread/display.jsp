@@ -149,8 +149,8 @@
 						<form:textarea rows="2" path="text" code="thread.comment"
 							class="form-control noresize" />
 
-						<span class="input-group-addon"> <input type="submit"
-							name="save" code="comment.save" class="btn btn-primary" />
+						<span class="input-group-addon"> 
+							<button type="submit" name="save" class="btn btn-primary"><spring:message code="comment.save" /></button>  
 						</span>
 					</div>
 				</div>
