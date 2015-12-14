@@ -8,22 +8,25 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 @Entity
 @Access(AccessType.PROPERTY)
 public class User extends Actor{
 	
+	// Constructors ------------------------------------------------------------
+	public User() {
+		super();
+	}
 	
-	
+	// Attributes -------------------------------------------------------------
 	private boolean banned;
-	
 	private int numberOfMessages;
 	private String url;
 	
 	
 	
-	@NotNull
-	
+//	@NotNull
 	public boolean isBanned() {
 		return banned;
 	}
@@ -31,13 +34,16 @@ public class User extends Actor{
 		this.banned = banned;
 	}
 	
+//	@NotNull
 	public int getNumberOfMessages() {
 		return numberOfMessages;
 	}
 	public void setNumberOfMessages(int numberOfMessages) {
 		this.numberOfMessages = numberOfMessages;
 	}
-	@SafeHtml
+	
+//	@SafeHtml
+//	@NotBlank
 	public String getUrl() {
 		return url;
 	}
@@ -48,9 +54,7 @@ public class User extends Actor{
 	
 	
 	
-	//relationShips
-	
-	
+	// Relationships ----------------------------------------------------------
 	Collection<Comment> comments;
 	Collection<Hilo> threads;
 	
@@ -62,6 +66,7 @@ public class User extends Actor{
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}
+	
 	@NotNull
 	@OneToMany(mappedBy="user")
 	public Collection<Hilo> getThreads() {

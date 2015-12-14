@@ -18,16 +18,50 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<form:form action="customer/loginMake.do" method="post" modelAttribute="account">
-
-<form:hidden path="id"/>
-<form:hidden path="version"/>	
-<acme:textbox code="customer.user" path="username"/>
-<acme:password code="customer.pass" path="password"/>
-<acme:submit name="save" code="customer.submit"/>
+</br>
+</br>
+</br>
 
 
+<div class="container">    
+        
+    <div id="loginbox" class="mainbox col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3"> 
 
+        
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center"><spring:message code="login.login" /></div>
+            </div>     
 
+            <div class="panel-body" >
 
-</form:form>
+                <form:form action="user/loginMake.do" id="form" class="form-horizontal"  method="post" modelAttribute="account">
+                   		<form:hidden path="id"/>
+						<form:hidden path="version"/>	
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <form:input code="customer.user" path="username" id="user" class="form-control" />                                        
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <form:password code="customer.password" path="password" id="password" class="form-control" />
+                    </div>                                                                  
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-sm-12 controls">
+                            <button type="submit" name="save" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> <spring:message code="login.login" /></button>                          
+                        </div>
+                    </div>
+
+                </form:form>     
+
+            </div>                     
+        </div>  
+    </div>
+</div>
+</br>
+</br>
+</br>
+

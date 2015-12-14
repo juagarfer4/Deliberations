@@ -20,7 +20,14 @@ import org.springframework.test.annotation.Timed;
 @Access(AccessType.PROPERTY)
 public class Hilo extends DomainEntity{
 	
+	// Constructors ------------------------------------------------------------
 	
+		public Hilo() {
+			super();
+		}
+		
+	
+	// Attributes -------------------------------------------------------------
 	
 	private String title;
 	private Date creationMoment;
@@ -28,7 +35,6 @@ public class Hilo extends DomainEntity{
 	
 	
 	@NotBlank
-	@SafeHtml
 	public String getTitle() {
 		return title;
 	}
@@ -55,7 +61,7 @@ public class Hilo extends DomainEntity{
 		this.text = text;
 	}
 	
-	//relationShips
+	// Relationships ----------------------------------------------------------
 	
 	private User user;
 	private Collection<Comment> comments;
@@ -68,6 +74,8 @@ public class Hilo extends DomainEntity{
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
 	@NotNull
 	@OneToMany(mappedBy="thread")
 	public Collection<Comment> getComments() {
