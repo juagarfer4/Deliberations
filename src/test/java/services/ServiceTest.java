@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import utilities.AbstractTest;
 import domain.Comment;
-import domain.Hilo;
 import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -49,10 +48,8 @@ public class ServiceTest extends AbstractTest {
 		result.getUserAccount().setPassword("prueba");
 		result.setEmail("prueba@gmail.com");
 		result.setSurname("prueba");
-		result.setUrl("www.google.es");
-		result.setLocation("Prueba");
 
-		result=userService.save(result);
+		userService.save(result);
 		
 		System.out.println("El usuario ha sido creado correctamente.");
 		
@@ -67,18 +64,18 @@ public class ServiceTest extends AbstractTest {
 		@Test
 		public void testCreateThread() {
 			
-			authenticate("customer");
-			Hilo result;
+			authenticate("user1");
+			domain.Thread result;
 			
 
 			result = threadService.create();
 			
 			result.setTitle("Titulo prueba");
-			result.setText("Texto prueba");
+			result.setDecription("Texto prueba");
 
 			
 
-			result=threadService.save(result);
+			threadService.save(result);
 			
 			
 			System.out.println("El hilo ha sido creado correctamente.");
@@ -91,21 +88,21 @@ public class ServiceTest extends AbstractTest {
 				@Test
 				public void testCreateComment() {
 					
-					authenticate("customer");
+					authenticate("user1");
 					Comment result;
-					Hilo hilo;
+					domain.Thread hilo;
 
 					result = new Comment();
 					
-					hilo= threadService.findOne(5);
+					hilo= threadService.findOne(6);
 					result.setCreationMoment(new Date());
 					
 					result.setThread(hilo);
-					result.setUser(userService.findUserByPrincipal());
+					result.setUser(userService.findOneByPrincipal());
 					result.setText("Texto comentario");
 					
 
-					result=commentService.save(result);
+					commentService.save(result);
 					
 					
 					System.out.println("El comentario ha sido creado correctamente.");
@@ -118,9 +115,9 @@ public class ServiceTest extends AbstractTest {
 				@Test
 				public void testListAllThreads() {
 					
-					authenticate("customer");
+					authenticate("user1");
 					
-					Collection<Hilo> result;
+					Collection<domain.Thread> result;
 					
 					result= threadService.findAll();
 					
