@@ -43,7 +43,7 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
-		
+		<security:intercept-url pattern="/rating/**.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/thread/**.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/comment/save.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/user/loginMake.do" access="permitAll" />

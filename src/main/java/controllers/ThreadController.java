@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -177,6 +178,7 @@ public class ThreadController extends AbstractController {
 		return result;
 	}
 	
+		
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid domain.Thread thread, BindingResult binding){
 		ModelAndView result;
@@ -196,6 +198,8 @@ public class ThreadController extends AbstractController {
 		
 		return result;
 	}
+	
+
 	
 	@RequestMapping("/delete")
 	public ModelAndView deleteThread(@RequestParam int id){
@@ -374,10 +378,13 @@ public class ThreadController extends AbstractController {
 	private ModelAndView createEditModelAndView(domain.Thread thread){
 		ModelAndView result;
 		
+	
 		result = createEditModelAndView(thread, null);
+		
 		
 		return result;
 	}
+	
 	
 //	private ModelAndView createEditModelAndView(Hilo thread, String message){
 //		ModelAndView result;
@@ -412,6 +419,11 @@ public class ThreadController extends AbstractController {
 		
 		return result;
 	}
+	
+	
+	
+	
+	
 	
 
 //CREACIÓN LOGIN FROM CABINA DE VOTACIÓN, NOS VIENE UNA ID Y UN TOKEN PARA COMPRAR CON AUTENTIFICACIÓN IMPLEMENTAR ES NECESARIO IMPLEMENTAR - 
