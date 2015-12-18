@@ -35,7 +35,7 @@
 
             <div class="panel-body" >
 
-                <form:form action="user/loginMake.do" id="form" class="form-horizontal"  method="post" modelAttribute="account">
+                <form:form action="user/loginMake.do" id="form" class="form-horizontal"  method="post" modelAttribute="userAccount">
                    		<form:hidden path="id"/>
 						<form:hidden path="version"/>	
                     <div class="input-group">

@@ -30,6 +30,7 @@
 				<form:hidden path="user" />
 				<form:hidden path="creationMoment" />
 				<form:hidden path="comments" />
+				<form:hidden path="ratings" />
 
 				<div class="form-group">
 					<form:label path="title" class="control-label col-md-2" for="email">
@@ -42,13 +43,13 @@
 				</div>
 
 				<div class="form-group">
-					<form:label path="text" class="control-label col-md-2" for="pwd">
+					<form:label path="decription" class="control-label col-md-2" for="pwd">
 						<spring:message code="thread.text" />
 					</form:label>
 					<div class="col-md-8">
-						<form:textarea rows="3" path="text" class="form-control noresize"
+						<form:textarea rows="3" path="decription" class="form-control noresize"
 							id="pwd" />
-						<form:errors class="error" path="text" />
+						<form:errors class="error" path="decription" />
 					</div>
 				</div>
 

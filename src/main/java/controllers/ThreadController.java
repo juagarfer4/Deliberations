@@ -11,12 +11,10 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,7 +25,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,23 +32,19 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
+import domain.CensusUser;
+import domain.Comment;
+import domain.User;
 import security.LoginService;
 import security.UserAccount;
 import services.CommentService;
 import services.ThreadService;
 import services.UserService;
-import domain.CensusUser;
-import domain.Comment;
-import domain.Hilo;
-import domain.Token;
-import domain.User;
 
 
 @Controller
@@ -87,7 +80,7 @@ public class ThreadController extends AbstractController {
 	public ModelAndView prueba(){
 		//creacion de variables
 		ModelAndView result;
-		Collection<Hilo> threads;
+		Collection<domain.Thread> threads;
 		//asignacion de valores
 		threads=threadService.findAll();
 		result=new ModelAndView("thread/list");
@@ -102,7 +95,7 @@ public class ThreadController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView seeThread(@RequestParam int id, @RequestParam Integer p){
 		ModelAndView result;
-		Hilo hilo;
+		domain.Thread hilo;
 		String hiloTitle;
 		Collection<Comment> comments;
 		Integer lastPage;
@@ -120,7 +113,7 @@ public class ThreadController extends AbstractController {
 		
 		comment.setCreationMoment(new Date());
 		comment.setThread(hilo);
-		comment.setUser(userService.findUserByPrincipal());
+		comment.setUser(userService.findOneByPrincipal());
 		result.addObject("comment", comment);
 		result.addObject("p", p);
 		result.addObject("lastPage",lastPage);
@@ -161,7 +154,7 @@ public class ThreadController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Hilo thread;
+		domain.Thread thread;
 		
         thread  = threadService.create();
         result = new ModelAndView("thread/edit");
@@ -177,7 +170,7 @@ public class ThreadController extends AbstractController {
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int threadId){
-		Hilo thread=threadService.findOne(threadId);
+		domain.Thread thread=threadService.findOne(threadId);
 		
 		ModelAndView result=createEditModelAndView(thread);
 		
@@ -185,7 +178,7 @@ public class ThreadController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Hilo thread, BindingResult binding){
+	public ModelAndView save(@Valid domain.Thread thread, BindingResult binding){
 		ModelAndView result;
 		
 		if (binding.hasErrors()) {
@@ -208,7 +201,7 @@ public class ThreadController extends AbstractController {
 	public ModelAndView deleteThread(@RequestParam int id){
 		
 		
-		Hilo thread=threadService.findOne(id);
+		domain.Thread thread=threadService.findOne(id);
 		
 		
 		//TODO
@@ -323,11 +316,11 @@ public class ThreadController extends AbstractController {
 		if(nameFinal.equals("")){
 			
 			return loginFromCensusFrom();
-		}else if(userService.findUserByUsername(nameFinal)!=null){//esta en la base de datos
+		}else if(userService.findByUsername(nameFinal)!=null){//esta en la base de datos
 			
 			// Login
 			
-			loginMakeFromCensus(userService.findUserByUsername(username).getUserAccount(), httpRequest);
+			loginMakeFromCensus(userService.findByUsername(username).getUserAccount(), httpRequest);
 			
 			result=new ModelAndView("list");
 			
@@ -378,7 +371,7 @@ public class ThreadController extends AbstractController {
 	
 	// Ancillary methods ----------------------------------------------------------------------
 	
-	private ModelAndView createEditModelAndView(Hilo thread){
+	private ModelAndView createEditModelAndView(domain.Thread thread){
 		ModelAndView result;
 		
 		result = createEditModelAndView(thread, null);
@@ -409,7 +402,7 @@ public class ThreadController extends AbstractController {
 //		return result;
 //	}
 	
-	public ModelAndView createEditModelAndView(Hilo thread, String message) {
+	public ModelAndView createEditModelAndView(domain.Thread thread, String message) {
 		ModelAndView result;
 		
 		result = new ModelAndView("thread/edit");
@@ -435,11 +428,11 @@ public class ThreadController extends AbstractController {
 	@RequestMapping("/createThreadFromVotacion")
 	public ModelAndView createTreadFromVotacion(String name){
 		
-		User user=userService.findUserByUsername("customer");
+		User user=userService.findByUsername("customer");
 		
-		Hilo nuevo=new Hilo();
+		domain.Thread nuevo=new domain.Thread();
 		nuevo.setCreationMoment(new Date());
-		nuevo.setText("Hilo sobre la votación: "+name);
+		nuevo.setDecription("Hilo sobre la votación: "+name);
 		nuevo.setUser(user);
 		nuevo.setTitle("Votación "+name);
 		nuevo.setComments(new ArrayList<Comment>());
