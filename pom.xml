@@ -338,11 +338,4 @@
 		</dependency>
 
 	</dependencies>
-	<distributionManagement>
-		<repository>
-			<id>repositoryId</id>
-			<name>repository</name>
-			<url> file:\\C:\MavenRepository</url>
-		</repository>
-	</distributionManagement>
 </project>
