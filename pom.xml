@@ -340,7 +340,7 @@
 	</dependencies>
 	<distributionManagement>
 		<repository>
-			<id>repositoryId</id>
+			<id>TomcatServer</id>
 			<name>repository</name>
 			<url> file:\\C:\MavenRepository</url>
 		</repository>
