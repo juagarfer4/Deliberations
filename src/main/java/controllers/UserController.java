@@ -134,7 +134,7 @@ public class UserController extends AbstractController {
 		userAccount.addAuthority(authority);
 
 		result = new ModelAndView("user/login");
-		result.addObject("account", userAccount);
+		result.addObject("userAccount", userAccount);
 
 		return result;
 	}
