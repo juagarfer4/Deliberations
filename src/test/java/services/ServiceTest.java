@@ -10,9 +10,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Comment;
+import domain.Rating;
 import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,6 +34,9 @@ public class ServiceTest extends AbstractTest {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private RatingService ratingService;
 
 	// Tests --------------------------------------------------------------
 
@@ -125,4 +130,27 @@ public class ServiceTest extends AbstractTest {
 					unauthenticate();
 
 				}
-}
+				
+				// Create rating -----------------------------------------------------------------
+				
+				@Test
+				public void createRating(){
+					authenticate("user1");
+					Integer totalAntes=ratingService.findAll().size();
+					Rating res=ratingService.create();
+					domain.Thread thread=threadService.findOne(7);
+					res.setRate(4);
+					res.setThread(thread);
+					ratingService.save(res);
+					Integer totalDespues=ratingService.findAll().size();
+					Assert.isTrue(totalAntes<totalDespues);
+					unauthenticate();
+
+				}
+				
+				
+					
+					
+			
+				}
+
