@@ -30,11 +30,18 @@
 				<form:hidden path="user" />
 				<form:hidden path="thread" />
 				
-				<spring:message code="rating.rating" />
-	<form:select path="rate">
-    <form:options items="${ratings}"/>
-</form:select>
-	<br />
+				
+				
+
+				<div class="jumbotron">
+				  <spring:message code="rating.rating" />
+					<form:select path="rate" class="form-control">
+				   		 <form:options items="${ratings}"/>
+					</form:select>
+				</div>
+
+
+			<br />
 
 				<div class="form-group">
 					<div class="col-md-10">
