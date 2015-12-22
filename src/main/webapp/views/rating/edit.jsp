@@ -23,35 +23,18 @@
 <br />
 <div class="container">
 			<form:form action="${actionURI}" method="post"
-				modelAttribute="thread" class="form-horizontal" role="form">
+				modelAttribute="rating" class="form-horizontal" role="form">
 
 				<form:hidden path="id" />
 				<form:hidden path="version" />
 				<form:hidden path="user" />
-				<form:hidden path="creationMoment" />
-				<form:hidden path="comments" />
-				<form:hidden path="ratings" />
-
-				<div class="form-group">
-					<form:label path="title" class="control-label col-md-2" for="email">
-						<spring:message code="thread.title" />
-					</form:label>
-					<div class="col-md-8">
-						<form:input path="title" class="form-control" id="email" />
-						<form:errors class="error" path="title" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<form:label path="decription" class="control-label col-md-2" for="pwd">
-						<spring:message code="thread.text" />
-					</form:label>
-					<div class="col-md-8">
-						<form:textarea rows="3" path="decription" class="form-control noresize"
-							id="pwd" />
-						<form:errors class="error" path="decription" />
-					</div>
-				</div>
+				<form:hidden path="thread" />
+				
+				<spring:message code="rating.rating" />
+	<form:select path="rate">
+    <form:options items="${ratings}"/>
+</form:select>
+	<br />
 
 				<div class="form-group">
 					<div class="col-md-10">

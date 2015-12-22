@@ -62,7 +62,7 @@
 									value="${hilo.creationMoment}"></jstl:out></span>
 						</div>
 						<div class="panel-body">
-							<jstl:out value="${hilo.text}"></jstl:out>
+							<jstl:out value="${hilo.decription}"></jstl:out>
 						</div>
 						<!-- /panel-body -->
 					</div>

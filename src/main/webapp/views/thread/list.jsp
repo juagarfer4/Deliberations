@@ -62,6 +62,13 @@
 			<span class="badge"> <jstl:out value="${row.comments.size()}"></jstl:out>
 			</span>
 		</display:column>
+		
+		
+			<display:column>
+				<a href="rating/edit.do?threadId=${row.id}">
+				<spring:message code="thread.rate" />
+			</a>
+			</display:column>	
 
 	</display:table>
 </div>

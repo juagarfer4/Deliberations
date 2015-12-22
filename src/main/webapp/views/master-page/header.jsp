@@ -143,6 +143,10 @@
 								class="glyphicon glyphicon-tasks " aria-hidden="true"></span> <spring:message
 									code="master.page.forum" />
 						</a></li>
+						
+						<li><a href="dashboard/list.do"> <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span> <spring:message
+									code="master.page.dashboard" />
+						</a></li>
 
 						<li class="dropdown"><a href="" class="dropdown-toggle"
 							data-toggle="dropdown"><spring:message
