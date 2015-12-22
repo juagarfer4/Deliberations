@@ -8,21 +8,23 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.test.annotation.Timed;
 @Entity
 @Access(AccessType.PROPERTY)
-public class Hilo extends DomainEntity{
+@Table(name="hilo")
+public class Thread extends DomainEntity{
 	
 	// Constructors ------------------------------------------------------------
 	
-		public Hilo() {
+		public Thread() {
 			super();
 		}
 		
@@ -31,8 +33,8 @@ public class Hilo extends DomainEntity{
 	
 	private String title;
 	private Date creationMoment;
-	private String text;
-	
+	private String decription;
+	private Boolean erase;
 	
 	@NotBlank
 	public String getTitle() {
@@ -41,7 +43,7 @@ public class Hilo extends DomainEntity{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
@@ -51,21 +53,27 @@ public class Hilo extends DomainEntity{
 	public void setCreationMoment(Date creationMoment) {
 		this.creationMoment = creationMoment;
 	}
-	
 	@NotBlank
-	@SafeHtml
-	public String getText() {
-		return text;
+	public String getDecription() {
+		return decription;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setDecription(String decription) {
+		this.decription = decription;
+	}
+	public Boolean getErase() {
+		return erase;
+	}
+	public void setErase(Boolean erase) {
+		this.erase = erase;
 	}
 	
 	// Relationships ----------------------------------------------------------
 	
 	private User user;
 	private Collection<Comment> comments;
+	private Collection<Rating> ratings;
 	
+	@Valid
 	@NotNull
 	@ManyToOne(optional=false)
 	public User getUser() {
@@ -85,6 +93,13 @@ public class Hilo extends DomainEntity{
 		this.comments = comments;
 	}
 	
-	
+	@NotNull
+	@OneToMany(mappedBy="thread")
+	public Collection<Rating> getRatings() {
+		return ratings;
+	}
+	public void setRatings(Collection<Rating> ratings) {
+		this.ratings = ratings;
+	}
 	
 }

@@ -11,17 +11,13 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,23 +30,18 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Comment;
+import domain.Token;
+import domain.User;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.CommentService;
 import services.ThreadService;
 import services.UserService;
-import domain.CensusUser;
-import domain.Comment;
-import domain.Hilo;
-import domain.Token;
-import domain.User;
 
 @Controller
 @RequestMapping("/user")
@@ -505,7 +496,7 @@ public class UserController extends AbstractController {
 
 	// Ancillary methods ----------------------------------------------------------------------
 
-	private ModelAndView createEditModelAndView(Hilo thread) {
+	private ModelAndView createEditModelAndView(domain.Thread thread) {
 		ModelAndView result;
 		
 		result = createEditModelAndView(thread, null);
@@ -513,12 +504,12 @@ public class UserController extends AbstractController {
 		return result;
 	}
 
-	private ModelAndView createEditModelAndView(Hilo thread, String message) {
+	private ModelAndView createEditModelAndView(domain.Thread thread, String message) {
 		ModelAndView result;
 
 		if (thread.getUser() == null) {// NUEVO
 
-			thread.setUser(userService.findUserByPrincipal());
+			thread.setUser(userService.findOneByPrincipal());
 			thread.setCreationMoment(new Date());// necesario para la
 													// restricción de fecha de
 													// creación
@@ -550,11 +541,11 @@ public class UserController extends AbstractController {
 	@RequestMapping("/createThreadFromVotacion")
 	public ModelAndView createTreadFromVotacion(String name) {
 
-		User user = userService.findUserByUsername("customer");
+		User user = userService.findByUsername("customer");
 
-		Hilo nuevo = new Hilo();
+		domain.Thread nuevo = new domain.Thread();
 		nuevo.setCreationMoment(new Date());
-		nuevo.setText("Hilo sobre la votación: " + name);
+		nuevo.setDecription("Hilo sobre la votación: " + name);
 		nuevo.setUser(user);
 		nuevo.setTitle("Votación " + name);
 		nuevo.setComments(new ArrayList<Comment>());

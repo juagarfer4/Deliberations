@@ -22,6 +22,7 @@ import utilities.AbstractTest;
 import domain.Comment;
 import domain.Hilo;
 import domain.Token;
+import domain.Rating;
 import domain.User;
 import security.LoginService;
 import security.UserAccount;
@@ -46,12 +47,13 @@ public class ServiceTest extends AbstractTest {
 	
 	@Autowired
 	private LoginService loginService;
+	private RatingService ratingService;
 
 	// Tests --------------------------------------------------------------
 
 	// Create an user --------------------------------------------------------------
 
-//	@Test
+	@Test
 	public void testCreateUser() {
 
 		User result;
@@ -62,10 +64,8 @@ public class ServiceTest extends AbstractTest {
 		result.getUserAccount().setPassword("prueba");
 		result.setEmail("prueba@gmail.com");
 		result.setSurname("prueba");
-		result.setUrl("www.google.es");
-		result.setLocation("Prueba");
 
-		result=userService.save(result);
+		userService.save(result);
 		
 		System.out.println("El usuario ha sido creado correctamente.");
 		
@@ -77,21 +77,21 @@ public class ServiceTest extends AbstractTest {
 	
 	// Create a thread --------------------------------------------------------------
 
-//		@Test
+		@Test
 		public void testCreateThread() {
 			
-			authenticate("customer");
-			Hilo result;
+			authenticate("user1");
+			domain.Thread result;
 			
 
 			result = threadService.create();
 			
 			result.setTitle("Titulo prueba");
-			result.setText("Texto prueba");
+			result.setDecription("Texto prueba");
 
 			
 
-			result=threadService.save(result);
+			threadService.save(result);
 			
 			
 			System.out.println("El hilo ha sido creado correctamente.");
@@ -101,24 +101,24 @@ public class ServiceTest extends AbstractTest {
 		
 		// Create a comment --------------------------------------------------------------
 
-//				@Test
+				@Test
 				public void testCreateComment() {
 					
-					authenticate("customer");
+					authenticate("user1");
 					Comment result;
-					Hilo hilo;
+					domain.Thread hilo;
 
 					result = new Comment();
 					
-					hilo= threadService.findOne(5);
+					hilo= threadService.findOne(6);
 					result.setCreationMoment(new Date());
 					
 					result.setThread(hilo);
-					result.setUser(userService.findUserByPrincipal());
+					result.setUser(userService.findOneByPrincipal());
 					result.setText("Texto comentario");
 					
 
-					result=commentService.save(result);
+					commentService.save(result);
 					
 					
 					System.out.println("El comentario ha sido creado correctamente.");
@@ -128,12 +128,12 @@ public class ServiceTest extends AbstractTest {
 			
 				// List all threads --------------------------------------------------------------
 
-//				@Test
+				@Test
 				public void testListAllThreads() {
 					
-					authenticate("customer");
+					authenticate("user1");
 					
-					Collection<Hilo> result;
+					Collection<domain.Thread> result;
 					
 					result= threadService.findAll();
 					
@@ -142,6 +142,7 @@ public class ServiceTest extends AbstractTest {
 
 				}
 				
+
 				
 				@Test
 				public void testToken() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
@@ -169,4 +170,28 @@ public class ServiceTest extends AbstractTest {
 				
 				Assert.isTrue(resultOfToken.isValid());
 				}
-}
+
+
+				// Create rating -----------------------------------------------------------------
+				
+				@Test
+				public void createRating(){
+					authenticate("user1");
+					Integer totalAntes=ratingService.findAll().size();
+					Rating res=ratingService.create();
+					domain.Thread thread=threadService.findOne(7);
+					res.setRate(4);
+					res.setThread(thread);
+					ratingService.save(res);
+					Integer totalDespues=ratingService.findAll().size();
+					Assert.isTrue(totalAntes<totalDespues);
+					unauthenticate();
+
+				}
+				
+				
+					
+					
+			
+				}
+
