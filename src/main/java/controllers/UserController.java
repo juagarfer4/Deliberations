@@ -81,36 +81,6 @@ public class UserController extends AbstractController {
 	// Edition
 	// ------------------------------------------------------------------------
 
-	// // Cookies from authenticate
-	// public String getCookieValue(String cookieName, HttpServletRequest
-	// request) {
-	// String value;
-	//
-	// value = userService.getCookieValue(cookieName, request);
-	//
-	// return value;
-	// }
-
-	// //TODO para servicio
-	// @RequestMapping("/login2")
-	// public ModelAndView login( HttpServletRequest request){
-	//
-	// ModelAndView result=new ModelAndView("user/login");
-	//
-	// UserAccount account=new UserAccount();
-	// Authority au=new Authority();
-	// au.setAuthority("CUSTOMER");
-	// account.addAuthority(au);
-	// result.addObject("account", account);
-	// //PRUEBA DE COOKIES FROM AUTENTICATE
-	//
-	// System.out.println(getCookieValue("user", request));
-	// System.out.println(getCookieValue("token", request));
-	// System.out.println("se deberían haber mostrado");
-	//
-	// return result;
-	// }
-
 	// TODO a servicio
 	@RequestMapping("/login")
 	public ModelAndView login() {
@@ -130,129 +100,6 @@ public class UserController extends AbstractController {
 		return result;
 	}
 
-	// //login from census, this make a http get to census module and get the
-	// json output, after tries to make a login with json output
-	// //if the person is no present in the bd, save the new person and log in
-	// the context.
-	// //we are to trust the username census give us is unique
-	// //if the person is present in the bd, log in the context
-	// //TODO hacerlo bien, nueva funcionalidad
-	// @RequestMapping("/loginFromCensus")
-	// public ModelAndView loginFromCensus(String username, HttpServletRequest
-	// httpRequest) throws JsonParseException, JsonMappingException,
-	// IOException{
-	//
-	// //implementar
-	// ModelAndView result;
-	//
-	// System.out.println(username);
-	//
-	// // Encontrar en Censos con JSon
-	//
-	// ObjectMapper objectMapper=new ObjectMapper();
-	//
-	// //Document
-	// doc=Jsoup.connect("http://localhost:8080/ADMCensus/census/json_one_user.do?votacion_id=1&username="+username).get();
-	// //System.out.println(doc.toString());
-	//
-	// // Si da error, el usuario no está en el censo
-	//
-	// CensusUser censusUser=null;
-	// String nameFinal = "";
-	// try{
-	// // censusUser=objectMapper.readValue(new
-	// URL("http://localhost:8080/ADMCensus/census/json_one_user.do?votacion_id=1&username="+username),CensusUser.class);
-	//
-	// try{
-	// censusUser=objectMapper.readValue(new
-	// URL("http://localhost:8080/ADMCensus/census/findCensusByVote.do?idVotacion="+1),CensusUser.class);
-	// }catch( JsonParseException e){
-	// System.out.println(e.toString());
-	// return loginFromCensusFrom();
-	// }
-	// System.out.println(censusUser.toString());
-	// Assert.isTrue(censusUser.getUsername()!=null);
-	//
-	// for (String name: censusUser.getVoto_por_usuario().keySet()){
-	//
-	// if(name.equals(username)){
-	//
-	// nameFinal=name;
-	// }
-	//
-	// }
-	//
-	//
-	// }catch(Exception e){
-	//
-	//
-	// return loginFromCensusFrom();
-	// }
-	//
-	// // Si no, adelante
-	//
-	// if(nameFinal.equals("")){
-	//
-	// return loginFromCensusFrom();
-	// }else if(userService.findUserByUsername(nameFinal)!=null){//esta en la
-	// base de datos
-	//
-	// // Login
-	//
-	// loginMakeFromCensus(userService.findUserByUsername(username).getUserAccount(),
-	// httpRequest);
-	//
-	// result=new ModelAndView("thread/listThreads");
-	//
-	//
-	// }else{ // Al no estar, se le registra
-	// User user;
-	// UserAccount userAccount;
-	//
-	// user = userService.create(username);
-	// userAccount = user.getUserAccount();
-	//
-	// userService.save(user);
-	// loginMakeFromCensus(userAccount, httpRequest);
-	//
-	// result=new ModelAndView("thread/listThreads");
-	// }
-	// return result;
-	// }
-
-	// @RequestMapping(value="loginFromCensusForm", method = RequestMethod.GET)
-	// public ModelAndView loginFromCensusFrom(){
-	// ModelAndView result;
-	//
-	// result = new ModelAndView("user/loginFromCensusForm");
-	//
-	// return result;
-	// }
-
-	// public void loginMakeFromCensus(UserAccount user, HttpServletRequest
-	// request){
-	//
-	// try {
-	// // Must be called from request filtered by Spring Security, otherwise
-	// SecurityContextHolder is not updated
-	// System.out.println(request.toString());
-	// System.out.println("contraseña pepe de base de datos: "+user.getPassword());
-	// UsernamePasswordAuthenticationToken token = new
-	// UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword(),
-	// null);
-	// token.setDetails(new WebAuthenticationDetails(request));
-	// DaoAuthenticationProvider authenticator = new
-	// DaoAuthenticationProvider();
-	// authenticator.setUserDetailsService(userDetailsService);
-	//
-	// Authentication authentication = authenticator.authenticate(token);
-	// SecurityContextHolder.getContext().setAuthentication(authentication);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// SecurityContextHolder.getContext().setAuthentication(null);
-	// }
-	// }
-
 	@RequestMapping("/loginMake")
 	public ModelAndView loginMake(@Valid UserAccount user,
 			BindingResult bindingResult, HttpServletRequest request)
@@ -263,7 +110,8 @@ public class UserController extends AbstractController {
 			result = login();
 			System.out.println(bindingResult.toString());
 		}
-		// primero, debemos ver si esta logeado en el sistema mediante el token
+		// Mediante el token es posible comprobar si el nombre de usuario y la contraseña introducidos se corresponden
+		// con un usuario creado en Autenticación
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		Token resultOfToken = new Token();
@@ -272,31 +120,15 @@ public class UserController extends AbstractController {
 
 		tokenToVerify = loginService.verifyToken(user);
 
-//		System.out.println("el token para comprobar es: " + tokenToVerify);
-		// try {
 		resultOfToken = objectMapper.readValue(new URL(
 				"http://deliberations.hol.es/auth/api/checkToken?token="
 						+ tokenToVerify), domain.Token.class);
-//		System.out.println("el resultado de autenticación es: "
-//				+ resultOfToken.isValid());
-		// } catch (JsonParseException e1) {
-		// e1.printStackTrace();
-		// } catch (JsonMappingException e1) {
-		// e1.printStackTrace();
-		// } catch (MalformedURLException e1) {
-		// e1.printStackTrace();
-		// }
-		if (resultOfToken.isValid()) {// el usuario esta logueado en
-										// autenticación, debemos de loguearlo
-										// aqui
-			System.out.println("#0");
+		if (resultOfToken.isValid()) {// El usuario está logueado en
+										// Autenticación, debemos loguearlo
+										// aquí
 			if (!(bindingResult.hasErrors()) || bindingResult == null) {
 				Md5PasswordEncoder md5 = new Md5PasswordEncoder();
-				// System.out.println("password encodeado de customer: "+md5.encodePassword(user.getPassword(),
-				// null));
-				// System.out.println("password de base de datos cust: "+userService.findByPrincipal());
 				try {
-					System.out.println("#1");
 					String passDB = loginService.loadUserByUsername(
 							user.getUsername()).getPassword();
 					String passForm = md5.encodePassword(user.getPassword(),
@@ -308,9 +140,7 @@ public class UserController extends AbstractController {
 							.getPassword()
 							.equals(md5.encodePassword(user.getPassword(), null)));
 				} catch (Exception e) {
-					System.out.println("#2");
-					System.out.println(e.toString());
-					// Si no está en la base de datos, se crea:
+					// Si no está en nuestra base de datos, se crea:
 
 					User user2;
 
@@ -321,7 +151,6 @@ public class UserController extends AbstractController {
 				}
 
 				try {
-					System.out.println("#3");
 					// Must be called from request filtered by Spring Security,
 					// otherwise SecurityContextHolder is not updated
 
@@ -339,7 +168,6 @@ public class UserController extends AbstractController {
 					SecurityContextHolder.getContext().setAuthentication(
 							authentication);
 				} catch (Exception e) {
-					System.out.println("#4");
 					e.printStackTrace();
 					SecurityContextHolder.getContext().setAuthentication(null);
 				}
@@ -360,139 +188,6 @@ public class UserController extends AbstractController {
 		return result;
 
 	}
-
-//	// Login desde cookies
-//
-//	@RequestMapping("/loginMake2")
-//	public ModelAndView loginMake2(@Valid UserAccount user,
-//			BindingResult bindingResult, HttpServletRequest request) {
-//
-//		ModelAndView result = null;
-//
-//		if (bindingResult.hasErrors()) {
-//
-//			result = login();
-//			System.out.println(bindingResult.toString());
-//
-//		}
-//
-//		// primero, debemos ver si esta logeado en el sistema mediante el token
-//		ObjectMapper objectMapper = new ObjectMapper();
-//
-//		Token resultOfToken = new Token();
-//		// para generar el token se envia el password con md5
-//		String passwordMd5 = new Md5PasswordEncoder().encodePassword(
-//				user.getPassword(), null);
-//		// depues se vuelve a calcular el md5 del password + nombre de usario
-//		// antes
-//		passwordMd5 = user.getUsername()
-//				+ new Md5PasswordEncoder().encodePassword(passwordMd5, null);
-//		// despues de vuelve a calcular el md5 y se le añade el nombre mas dos
-//		// puntos
-//		passwordMd5 = user.getUsername() + ":"
-//				+ new Md5PasswordEncoder().encodePassword(passwordMd5, null);
-//		String tokenToVerify = passwordMd5;
-//		System.out.println("el token para comprobar es: " + tokenToVerify);
-//		try {
-//			resultOfToken = objectMapper.readValue(new URL(
-//					"http://deliberations.hol.es/auth/api/checkToken?token="
-//							+ tokenToVerify), domain.Token.class);
-//			System.out.println("el resultado de autenticación es: "
-//					+ resultOfToken.isValid());
-//
-//		} catch (JsonParseException e1) {
-//			e1.printStackTrace();
-//		} catch (JsonMappingException e1) {
-//			e1.printStackTrace();
-//		} catch (MalformedURLException e1) {
-//			e1.printStackTrace();
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-//
-//		if (resultOfToken.isValid()) {// el usuario esta logueado en
-//										// autenticación, debemos de loguearlo
-//										// aqui
-//
-//			if (!(bindingResult.hasErrors()) || bindingResult == null) {
-//				Md5PasswordEncoder md5 = new Md5PasswordEncoder();
-//				// System.out.println("password encodeado de customer: "+md5.encodePassword(user.getPassword(),
-//				// null));
-//				// System.out.println("password de base de datos cust: "+userService.findByPrincipal());
-//				try {
-//					String passDB = loginService.loadUserByUsername(
-//							user.getUsername()).getPassword();
-//					String passForm = md5.encodePassword(user.getPassword(),
-//							null);
-//					System.out.println(passDB);
-//					System.out.println(passForm);
-//					Assert.isTrue(loginService
-//							.loadUserByUsername(user.getUsername())
-//							.getPassword()
-//							.equals(md5.encodePassword(user.getPassword(), null)));
-//				} catch (Exception e) {
-//					System.out.println(e.toString());
-//					// no esta en la base de datos, lo creamos en entonces:
-//
-//					User user2 = new User();
-//					UserAccount userAccount = new UserAccount();
-//					Authority a = new Authority();
-//					a.setAuthority("CUSTOMER");
-//					userAccount.setUsername(user.getUsername());
-//					userAccount.setPassword(new Md5PasswordEncoder()
-//							.encodePassword(user.getPassword(), null));
-//					userAccount.addAuthority(a);
-//					user2.setName(user.getUsername());
-//					user2.setUserAccount(userAccount);
-//					user2.setBanned(false);
-//					user2.setEmail("user@mail");
-//					user2.setLocation("location2");
-//					user2.setNumberOfMessages(0);
-//					user2.setSurname("usernameSurnam");
-//					user2.setComments(new ArrayList<Comment>());
-//					user2.setThreads(new ArrayList<Hilo>());
-//
-//					userService.save(user2);
-//
-//				}
-//
-//				try {
-//					// Must be called from request filtered by Spring Security,
-//					// otherwise SecurityContextHolder is not updated
-//
-//					System.out.println(request.toString());
-//
-//					UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-//							user.getUsername(), md5.encodePassword(
-//									user.getPassword(), null));
-//					token.setDetails(new WebAuthenticationDetails(request));
-//					DaoAuthenticationProvider authenticator = new DaoAuthenticationProvider();
-//					authenticator.setUserDetailsService(userDetailsService);
-//
-//					Authentication authentication = authenticator
-//							.authenticate(token);
-//					SecurityContextHolder.getContext().setAuthentication(
-//							authentication);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//					SecurityContextHolder.getContext().setAuthentication(null);
-//				}
-//
-//				result = new ModelAndView("thread/listThreads");
-//
-//			}
-//
-//		} else {// no esta logueado, a tomar por el fonete
-//
-//			result = login();
-//
-//		}
-//
-//		// depues ya podemos loguearlo en el sistema nuestro
-//
-//		return result;
-//
-//	}
 
 	// Ancillary methods ----------------------------------------------------------------------
 
@@ -554,9 +249,6 @@ public class UserController extends AbstractController {
 		return new ModelAndView("redirect:thread/list.do");
 
 		// CreacionAdminVotaciones/#/create
-	}
 
-	// login desde cabina votacion con toquen, falta implementar por falta de
-	// token por parte de autenticación a ellos
-	// @RequestMapping("loginFromCabinaVotacion")
+	}
 }

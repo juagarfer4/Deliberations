@@ -214,55 +214,6 @@ public class ThreadController extends AbstractController {
 		
 	}
 	
-//	// Cookies from authenticate
-//	 public String getCookieValue(String cookieName, HttpServletRequest request) {
-//		    String value;
-//		    
-//		    value = userService.getCookieValue(cookieName, request);
-//		    
-//		    return value;
-//	 }
-	
-	
-	
-//	//TODO para servicio
-//	@RequestMapping("/login2")
-//	public ModelAndView login( HttpServletRequest request){
-//		
-//		ModelAndView result=new ModelAndView("user/login");
-//		
-//		UserAccount account=new UserAccount();
-//		Authority au=new Authority();
-//		au.setAuthority("CUSTOMER");
-//		account.addAuthority(au);
-//		result.addObject("account", account);
-//		//PRUEBA DE COOKIES FROM AUTENTICATE
-//		
-//		System.out.println(getCookieValue("user", request));
-//		System.out.println(getCookieValue("token", request));
-//		System.out.println("se deberían haber mostrado");
-//		
-//		return result; 
-//	}
-	
-//	@RequestMapping("/login")
-//	public ModelAndView login(){
-//		ModelAndView result;
-//		UserAccount userAccount;
-//		Authority authority;
-//		
-//		userAccount = new UserAccount();
-//		authority = new Authority();
-//		
-//		authority.setAuthority("CUSTOMER");
-//		userAccount.addAuthority(authority);
-//		
-//		result = new ModelAndView("user/login");
-//		result.addObject("account", userAccount);
-//		
-//		return result; 
-//	}
-	
 	//login from census, this make a http get to census module and get the json output, after tries to make a login with json output
 	//if the person is no present in the bd, save the new person and log in the context.
 	//we are to trust the username census give us is unique
@@ -288,7 +239,6 @@ public class ThreadController extends AbstractController {
 		CensusUser censusUser=null;
 		String nameFinal = "";
 		try{
-		// censusUser=objectMapper.readValue(new URL("http://localhost:8080/ADMCensus/census/json_one_user.do?votacion_id=1&username="+username),CensusUser.class);
 		
 			try{
 			censusUser=objectMapper.readValue(new URL("http://localhost:8080/ADMCensus/census/findCensusByVote.do?idVotacion="+1),CensusUser.class);
@@ -385,30 +335,6 @@ public class ThreadController extends AbstractController {
 		return result;
 	}
 	
-	
-//	private ModelAndView createEditModelAndView(Hilo thread, String message){
-//		ModelAndView result;
-//		
-//		if(thread.getUser()==null){//NUEVO
-//			
-//			thread.setUser(userService.findUserByPrincipal());
-//			thread.setCreationMoment(new Date());//necesario para la restricción de fecha de creación
-//			result=new ModelAndView("edit");
-//			result.addObject("user", thread.getUser());
-//			result.addObject("thread", thread);			
-//			
-//		}else{
-//			User user=thread.getUser();
-//			
-//			result=new ModelAndView("edit");
-//			
-//			result.addObject("thread", thread);
-//			result.addObject("user", user);
-//		}
-//		
-//		return result;
-//	}
-	
 	public ModelAndView createEditModelAndView(domain.Thread thread, String message) {
 		ModelAndView result;
 		
@@ -455,10 +381,4 @@ public class ThreadController extends AbstractController {
 		//CreacionAdminVotaciones/#/create
 	}
 	
-	
-	
-	
-	
-	//login desde cabina votacion con toquen, falta implementar por falta de token por parte de autenticación a ellos
-	//@RequestMapping("loginFromCabinaVotacion")
 }
