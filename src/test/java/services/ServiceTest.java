@@ -155,7 +155,7 @@ public class ServiceTest extends AbstractTest {
 		tokenToVerify = loginService.verifyToken(userAccount);
 
 		resultOfToken = objectMapper.readValue(new URL(
-				"http://localhost/auth/api/checkToken?user=" + userAccount + "&token=" + tokenToVerify),
+				"http://localhost/Auth/api/checkToken?user=" + userAccount + "&token=" + tokenToVerify),
 				domain.Token.class);
 		System.out.println("resultado del token: " + resultOfToken.isValid());
 
