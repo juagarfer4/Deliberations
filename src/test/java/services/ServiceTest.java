@@ -135,8 +135,9 @@ public class ServiceTest extends AbstractTest {
 
 	}
 
-	//@Test
-	public void testAuthConnection() throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+	@Test
+	public void testAuthConnection()
+			throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 
 		ObjectMapper objectMapper;
 		UserAccount userAccount;
@@ -152,11 +153,13 @@ public class ServiceTest extends AbstractTest {
 		userAccount.setUsername("pabcargar2");
 		userAccount.setPassword("pabcargar2");
 
+		// Se crea el token a verificar
 		tokenToVerify = loginService.verifyToken(userAccount);
 
-		resultOfToken = objectMapper.readValue(new URL(
-				"http://localhost/Auth/api/checkToken?token=" + tokenToVerify),
-				domain.Token.class);
+		// Se realiza la petición de consulta
+		resultOfToken = objectMapper.readValue(new URL("http://localhost/Auth/api/checkToken?token=" + tokenToVerify),
+				Token.class);
+
 		System.out.println("resultado del token: " + resultOfToken.isValid());
 
 		Assert.isTrue(resultOfToken.isValid());
