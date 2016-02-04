@@ -101,7 +101,7 @@ public class UserController extends AbstractController {
 
 			// Se recupera la respuesta a la petición
 
-			response = objectMapper.readValue(new URL("http://localhost/auth/api/checkToken?token=" + tokenToVerify),
+			response = objectMapper.readValue(new URL("http://localhost/Auth/api/checkToken?token=" + tokenToVerify),
 					Token.class);
 
 			// Se comprueba que la respuesta recibida sea válida

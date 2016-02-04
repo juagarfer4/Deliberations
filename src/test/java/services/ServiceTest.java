@@ -149,13 +149,13 @@ public class ServiceTest extends AbstractTest {
 		// Se asignan usuario y contraseña a una cuenta de usuario nueva porque
 		// si se recuperase una ya creada incluiría el hash
 		// de la contraseña en lugar de la contraseña en sí
-		userAccount.setUsername("usuario");
-		userAccount.setPassword("usuario");
+		userAccount.setUsername("pabcargar2");
+		userAccount.setPassword("pabcargar2");
 
 		tokenToVerify = loginService.verifyToken(userAccount);
 
 		resultOfToken = objectMapper.readValue(new URL(
-				"http://deliberations.hol.es/auth/api/checkToken?user=" + userAccount + "&token=" + tokenToVerify),
+				"http://localhost/auth/api/checkToken?user=" + userAccount + "&token=" + tokenToVerify),
 				domain.Token.class);
 		System.out.println("resultado del token: " + resultOfToken.isValid());
 
