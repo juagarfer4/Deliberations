@@ -15,7 +15,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -62,9 +61,6 @@ public class ThreadController extends AbstractController {
 	
 	@Autowired
 	private CommentService commentService;
-	
-	@Autowired
-	private LoginService loginService;
 	
 	@Autowired
 	private UserDetailsService userDetailsService;

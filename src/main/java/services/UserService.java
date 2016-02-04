@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import domain.Comment;
 import domain.Rating;
+import domain.Thread;
 import domain.User;
 import repositories.UserRepository;
 import security.Authority;
@@ -34,35 +35,36 @@ public class UserService {
 	}
 
 	// Simple CRUD methods
-	public User create(String username){
+	public User create(String username) {
 		User res;
 		UserAccount userAccount;
 		Authority authority;
-		List<domain.Thread> threads;
+		List<Thread> threads;
 		List<Comment> comments;
 		List<Rating> ratings;
-		
+
 		res = new User();
 		userAccount = new UserAccount();
 		Collection<Authority> authorities = new ArrayList<Authority>();
 		authority = new Authority();
-		threads = new ArrayList<domain.Thread>();
+		threads = new ArrayList<Thread>();
 		comments = new ArrayList<Comment>();
-		ratings=new ArrayList<Rating>();
-		
+		ratings = new ArrayList<Rating>();
+
 		authority.setAuthority("USER");
 		authorities.add(authority);
 		userAccount.setUsername(username);
 		userAccount.setPassword(new Md5PasswordEncoder().encodePassword(username, null));
 		userAccount.setAuthorities(authorities);
-		
+
 		res.setName(username);
 		res.setUserAccount(userAccount);
 		res.setComments(comments);
 		res.setThreads(threads);
-		res.setRatings(ratings);	
+		res.setRatings(ratings);
 		return res;
 	}
+
 	public User findOne(int userId) {
 		return userRepository.findOne(userId);
 	}
@@ -81,34 +83,34 @@ public class UserService {
 
 	// Other business methods
 
-	public User findOneByPrincipal(){
-		User res=new User();
-		res=userRepository.findOneByPrincipal(LoginService.getPrincipal().getId());
+	public User findOneByPrincipal() {
+		User res = new User();
+		res = userRepository.findOneByPrincipal(LoginService.getPrincipal().getId());
 		return res;
 	}
-	
-	public User findByUsername(String username){
-		User res=new User();
-		res=userRepository.findByUsername(username);
+
+	public User findByUsername(String username) {
+		User res = new User();
+		res = userRepository.findByUsername(username);
 		return res;
 	}
-	
-	public Collection<User> findUserWithZeroComments(){
-		Collection<User> res= new ArrayList<User>();
-		res=userRepository.findUserWithZeroComments();
+
+	public Collection<User> findUserWithZeroComments() {
+		Collection<User> res = new ArrayList<User>();
+		res = userRepository.findUserWithZeroComments();
 		return res;
 	}
-	
-	public Collection<User> findUserWithMoreComments(){
-		Collection<User> res= new ArrayList<User>();
-		res=userRepository.findUserWithMoreComments();
+
+	public Collection<User> findUserWithMoreComments() {
+		Collection<User> res = new ArrayList<User>();
+		res = userRepository.findUserWithMoreComments();
 		return res;
 	}
-		
-	public Collection<User> findUserWithMoreThreads(){
-		Collection<User> res= new ArrayList<User>();
-		res=userRepository.findUserWithMoreThreads();
+
+	public Collection<User> findUserWithMoreThreads() {
+		Collection<User> res = new ArrayList<User>();
+		res = userRepository.findUserWithMoreThreads();
 		return res;
 	}
-	
+
 }
