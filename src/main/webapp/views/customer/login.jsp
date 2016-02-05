@@ -91,7 +91,7 @@
 		<jstl:if test="${message != null}">
 			<div class="info">
 				<spring:message code="login.info" />
-				<a href="http://agora-us.260mb.net" target="blank">Auth</a>
+				<a href="http://localhost/Auth" target="blank">Auth</a>
 				<spring:message code="login.info2" />
 			</div>
 		</jstl:if>
