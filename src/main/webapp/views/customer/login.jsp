@@ -20,9 +20,9 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-</br>
-</br>
-</br>
+<br/>
+<br/>
+<br/>
 
 <style type="text/css">
    a:link {color: #286090}
@@ -97,7 +97,7 @@
 		</jstl:if>
 	</div>
 </div>
-</br>
-</br>
-</br>
+<br/>
+<br/>
+<br/>
 

@@ -17,24 +17,33 @@ import security.LoginService;
 @Transactional
 public class RatingService {
 
-	// Managed repository
+	// Managed repository -----------------------------------------------------
+	
 	@Autowired
 	private RatingRepository ratingRepository;
 
-	// Supporting services
+	// Supporting services ----------------------------------------------------
+	
 	@Autowired
 	private UserService userService;
 
-	// Constructors
+	// Constructors -----------------------------------------------------------
+	
 	public RatingService() {
 		super();
 	}
 
-	// Simple CRUD methods
+	// Simple CRUD methods ----------------------------------------------------
+	
 	public Rating create() {
-		Rating res = new Rating();
-		User user=userService.findOneByPrincipal();
+		Rating res;
+		User user;
+		
+		res = new Rating();
+		user=userService.findOneByPrincipal();
+		
 		res.setUser(user);
+		
 		return res;
 	}
 
@@ -54,23 +63,32 @@ public class RatingService {
 		ratingRepository.delete(rating);
 	}
 
-	// Other business methods
+	// Other business methods -------------------------------------------------
 
 	public Collection<Rating> findRatingsOfThread(int idThread){
-		Collection<Rating> res= new ArrayList<Rating>();
+		Collection<Rating> res;
+		
+		res = new ArrayList<Rating>();
 		res=ratingRepository.findRatingsOfThread(idThread);
+		
 		return res;
 	}
 	
 	public Collection<Rating> findRatingsOfUser(){
-		Collection<Rating> res= new ArrayList<Rating>();
+		Collection<Rating> res;
+		
+		res = new ArrayList<Rating>();
 		res=ratingRepository.findRatingsOfUser(LoginService.getPrincipal().getId());
+		
 		return res;
 	}
 
 	public Integer totalRating(int idRate){
-		Integer res=0;
-		res=ratingRepository.totalRating(idRate);
+		Integer res;
+		
+		res = 0;
+		res = ratingRepository.totalRating(idRate);
+		
 		return res;
 	}
 }

@@ -21,31 +21,43 @@ import security.LoginService;
 @Transactional
 public class ThreadService {
 
-	// Managed repository
+	// Managed repository -----------------------------------------------------
+
 	@Autowired
 	private ThreadRepository threadRepository;
 
-	// Supporting services
+	// Supporting services ----------------------------------------------------
+
 	@Autowired
 	private UserService userService;
 
-	// Constructors
+	// Constructors -----------------------------------------------------------
+
 	public ThreadService() {
 		super();
 	}
 
-	// Simple CRUD methods
+	// Simple CRUD methods ----------------------------------------------------
+
 	public Thread create() {
-		Thread res = new Thread();
-		User user=userService.findOneByPrincipal();	
-		Collection<Comment> comments=new ArrayList<Comment>();
-		Collection<Rating> ratings=new ArrayList<Rating>();
-		Date date=new Date();
-		res.setUser(user);
-		res.setComments(comments);
-		res.setRatings(ratings);
-		res.setCreationMoment(date);
-		return res;
+		Thread result;
+		User user;
+		Collection<Comment> comments;
+		Collection<Rating> ratings;
+		Date date;
+
+		result = new Thread();
+		user = userService.findOneByPrincipal();
+		comments = new ArrayList<Comment>();
+		ratings = new ArrayList<Rating>();
+		date = new Date();
+
+		result.setUser(user);
+		result.setComments(comments);
+		result.setRatings(ratings);
+		result.setCreationMoment(date);
+
+		return result;
 	}
 
 	public Thread findOne(int threadId) {
@@ -57,8 +69,11 @@ public class ThreadService {
 	}
 
 	public void save(Thread thread) {
-		Date date=new Date(System.currentTimeMillis()-1000);
+		Date date;
+
+		date = new Date(System.currentTimeMillis() - 1000);
 		thread.setCreationMoment(date);
+
 		threadRepository.save(thread);
 	}
 
@@ -66,88 +81,113 @@ public class ThreadService {
 		threadRepository.delete(thread);
 	}
 
-	// Other business methods
-	
-	
-	public Collection<Thread> findThreadWithMoreComments(){
-		Collection<Thread> res= new ArrayList<Thread>();
-		res=threadRepository.findThreadWithMoreComments();
-		return res;
+	// Other business methods -------------------------------------------------
+
+	public Collection<Thread> findThreadWithMoreComments() {
+		Collection<Thread> result;
+
+		result = new ArrayList<Thread>();
+		result = threadRepository.findThreadWithMoreComments();
+
+		return result;
 	}
-	
-	public Collection<Thread> findThreadWithLessComments(){
-		Collection<Thread> res= new ArrayList<Thread>();
-		res=threadRepository.findThreadWithLessComments();
-		return res;
+
+	public Collection<Thread> findThreadWithLessComments() {
+		Collection<Thread> result;
+
+		result = new ArrayList<Thread>();
+		result = threadRepository.findThreadWithLessComments();
+
+		return result;
 	}
-	
-	public Collection<Thread> findThreadOfUser(){
-		Collection<Thread> res= new ArrayList<Thread>();
-		res=threadRepository.findThreadOfUser(LoginService.getPrincipal().getId());
-		return res;
+
+	public Collection<Thread> findThreadOfUser() {
+		Collection<Thread> result;
+
+		result = new ArrayList<Thread>();
+		result = threadRepository.findThreadOfUser(LoginService.getPrincipal().getId());
+
+		return result;
 	}
-	
-	public Collection<Thread> findThreadWithTitle(String title){
-		Collection<Thread> res= new ArrayList<Thread>();
-		res=threadRepository.findThreadWithTitle(title);
-		return res;
+
+	public Collection<Thread> findThreadWithTitle(String title) {
+		Collection<Thread> result;
+
+		result = new ArrayList<Thread>();
+		result = threadRepository.findThreadWithTitle(title);
+
+		return result;
 	}
-	
-	public Collection<Thread> findThreadAvailables(){
-		Collection<Thread> res= new ArrayList<Thread>();
-		res=threadRepository.findThreadAvailables();
-		return res;
+
+	public Collection<Thread> findThreadAvailables() {
+		Collection<Thread> result;
+
+		result = new ArrayList<Thread>();
+		result = threadRepository.findThreadAvailables();
+
+		return result;
 	}
-	
-	public Collection<Thread> findThreadMoreRating(){
-		Collection<Thread> res= new ArrayList<Thread>();
-		res=threadRepository.findThreadMoreRating();
-		return res;
+
+	public Collection<Thread> findThreadMoreRating() {
+		Collection<Thread> result;
+		
+		result = new ArrayList<Thread>();
+		result = threadRepository.findThreadMoreRating();
+		
+		return result;
 	}
-	
-	public Collection<Thread> findThreadLessRating(){
-		Collection<Thread> res= new ArrayList<Thread>();
-		res=threadRepository.findThreadLessRating();
-		return res;
+
+	public Collection<Thread> findThreadLessRating() {
+		Collection<Thread> result;
+
+		result = new ArrayList<Thread>();
+		result = threadRepository.findThreadLessRating();
+
+		return result;
 	}
-	
-	public List<Comment> findCommentsByPage(Integer valueOf, Integer p){
+
+	public List<Comment> findCommentsByPage(Integer valueOf, Integer p) {
 		domain.Thread hilo;
 		Integer numberRows;
 		List<Comment> paginatedComments;
-		
+
 		hilo = findOne(valueOf);
-		numberRows = p*10;
+		numberRows = p * 10;
 		paginatedComments = new ArrayList<Comment>();
-		
-		for(int i=numberRows-10; i<=hilo.getComments().size()-1; i++){
-			if(i < numberRows){
+
+		for (int i = numberRows - 10; i <= hilo.getComments().size() - 1; i++) {
+			if (i < numberRows) {
 				System.out.println((Comment) hilo.getComments().toArray()[i]);
 				paginatedComments.add((Comment) hilo.getComments().toArray()[i]);
-			}else{
+			} else {
 				break;
 			}
 		}
+
 		return paginatedComments;
-		
+
 	}
-	
-	public Integer calculateLastPage(Comment comment, domain.Thread hilo){
+
+	public Integer calculateLastPage(Comment comment, domain.Thread hilo) {
 		Double numberComments;
 		Double pageDouble;
-		Integer res;
-		
-		if(comment != null)
-			numberComments = (double) comment.getThread().getComments().size()+1;
+		Integer result;
+
+		if (comment != null)
+			numberComments = (double) comment.getThread().getComments().size() + 1;
 		else
 			numberComments = (double) hilo.getComments().size();
-		// Calcula qué pagina corresponde al mensaje recién creado, en decimal
-		pageDouble = numberComments/10;
-		// Se le aplica un redondeo siempre hacia arriba para el cálculo final de la página
 
-		res = (int) Math.ceil(pageDouble);
-		
-		return res;
-		
+		// Calcula qué pagina corresponde al mensaje recién creado, en decimal
+
+		pageDouble = numberComments / 10;
+
+		// Se le aplica un redondeo siempre hacia arriba para el cálculo final
+		// de la página
+
+		result = (int) Math.ceil(pageDouble);
+
+		return result;
+
 	}
 }

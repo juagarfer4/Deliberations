@@ -97,6 +97,7 @@ public class UserController extends AbstractController {
 		} else {
 
 			// Se monta el token a verificar para el usuario
+			
 			tokenToVerify = loginService.verifyToken(userAccount);
 
 			// Se recupera la respuesta a la petición
@@ -112,6 +113,7 @@ public class UserController extends AbstractController {
 				try {
 					// Se comprueba que el usuario que accede exista ya en
 					// Deliberaciones y se inicia sesión
+					
 					Assert.isTrue(loginService.loadUserByUsername(userAccount.getUsername()).getPassword()
 							.equals(md5.encodePassword(userAccount.getPassword(), null)));
 
