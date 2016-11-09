@@ -66,7 +66,7 @@ public class UserService {
 		result.setComments(comments);
 		result.setThreads(threads);
 		result.setRatings(ratings);
-		
+
 		return result;
 	}
 
@@ -90,45 +90,45 @@ public class UserService {
 
 	public User findOneByPrincipal() {
 		User result;
-		
+
 		result = new User();
 		result = userRepository.findOneByPrincipal(LoginService.getPrincipal().getId());
-		
+
 		return result;
 	}
 
 	public User findByUsername(String username) {
 		User result;
-		
+
 		result = new User();
 		result = userRepository.findByUsername(username);
-		
+
 		return result;
 	}
 
 	public Collection<User> findUserWithZeroComments() {
 		Collection<User> result = new ArrayList<User>();
-		
+
 		result = userRepository.findUserWithZeroComments();
-		
+
 		return result;
 	}
 
 	public Collection<User> findUserWithMoreComments() {
 		Collection<User> result;
-		
+
 		result = new ArrayList<User>();
 		result = userRepository.findUserWithMoreComments();
-		
+
 		return result;
 	}
 
 	public Collection<User> findUserWithMoreThreads() {
 		Collection<User> result;
-		
+
 		result = new ArrayList<User>();
 		result = userRepository.findUserWithMoreThreads();
-		
+
 		return result;
 	}
 

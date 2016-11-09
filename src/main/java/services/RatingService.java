@@ -36,15 +36,15 @@ public class RatingService {
 	// Simple CRUD methods ----------------------------------------------------
 	
 	public Rating create() {
-		Rating res;
+		Rating result;
 		User user;
 		
-		res = new Rating();
+		result = new Rating();
 		user=userService.findOneByPrincipal();
 		
-		res.setUser(user);
+		result.setUser(user);
 		
-		return res;
+		return result;
 	}
 
 	public Rating findOne(int ratingId) {
@@ -66,29 +66,29 @@ public class RatingService {
 	// Other business methods -------------------------------------------------
 
 	public Collection<Rating> findRatingsOfThread(int idThread){
-		Collection<Rating> res;
+		Collection<Rating> result;
 		
-		res = new ArrayList<Rating>();
-		res=ratingRepository.findRatingsOfThread(idThread);
+		result = new ArrayList<Rating>();
+		result = ratingRepository.findRatingsOfThread(idThread);
 		
-		return res;
+		return result;
 	}
 	
 	public Collection<Rating> findRatingsOfUser(){
-		Collection<Rating> res;
+		Collection<Rating> result;
 		
-		res = new ArrayList<Rating>();
-		res=ratingRepository.findRatingsOfUser(LoginService.getPrincipal().getId());
+		result = new ArrayList<Rating>();
+		result=ratingRepository.findRatingsOfUser(LoginService.getPrincipal().getId());
 		
-		return res;
+		return result;
 	}
 
 	public Integer totalRating(int idRate){
-		Integer res;
+		Integer result;
 		
-		res = 0;
-		res = ratingRepository.totalRating(idRate);
+		result = 0;
+		result = ratingRepository.totalRating(idRate);
 		
-		return res;
+		return result;
 	}
 }

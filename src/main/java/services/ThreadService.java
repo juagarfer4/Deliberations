@@ -130,10 +130,10 @@ public class ThreadService {
 
 	public Collection<Thread> findThreadMoreRating() {
 		Collection<Thread> result;
-		
+
 		result = new ArrayList<Thread>();
 		result = threadRepository.findThreadMoreRating();
-		
+
 		return result;
 	}
 
