@@ -17,20 +17,26 @@ import security.LoginService;
 @Transactional
 public class CommentService {
 
-	// Managed repository
+	// Managed repository -----------------------------------------------------
+
 	@Autowired
 	private CommentRepository commentRepository;
 
-	// Supporting services
+	// Supporting services ----------------------------------------------------
 
-	// Constructors
+	// Constructors -----------------------------------------------------------
+
 	public CommentService() {
 		super();
 	}
 
-	// Simple CRUD methods
+	// Simple CRUD methods ----------------------------------------------------
+
 	public Comment create() {
-		Comment res = new Comment();
+		Comment res;
+
+		res = new Comment();
+
 		return res;
 	}
 
@@ -50,40 +56,58 @@ public class CommentService {
 		commentRepository.delete(comment);
 	}
 
-	// Other business methods
+	// Other business methods -------------------------------------------------
 
-	public Collection<Comment> findCommentsOfHilo(int idHilo){
-		Collection<Comment> res= new ArrayList<Comment>();
-		res=commentRepository.findCommentsOfHilo(idHilo);
+	public Collection<Comment> findCommentsOfHilo(int idHilo) {
+		Collection<Comment> res = new ArrayList<Comment>();
+
+		res = new ArrayList<Comment>();
+		res = commentRepository.findCommentsOfHilo(idHilo);
+
 		return res;
 	}
-	
-	public Collection<Comment> findCommentsOfUser(){
-		Collection<Comment> res= new ArrayList<Comment>();
-		res=commentRepository.findCommentsOfUser(LoginService.getPrincipal().getId());
+
+	public Collection<Comment> findCommentsOfUser() {
+		Collection<Comment> res;
+		
+		res = new ArrayList<Comment>();
+		res = commentRepository.findCommentsOfUser(LoginService.getPrincipal().getId());
+
 		return res;
 	}
-	
-	public Collection<Comment> findCommentsInTheLastHours(Date creation){
-		Collection<Comment> res= new ArrayList<Comment>();
-		res=commentRepository.findCommentsInTheLastHours(creation);
+
+	public Collection<Comment> findCommentsInTheLastHours(Date creation) {
+		Collection<Comment> res;
+		
+		res = new ArrayList<Comment>();
+		res = commentRepository.findCommentsInTheLastHours(creation);
+
 		return res;
 	}
-	
-	public Collection<Comment> findAllCommentsDeleted(){
-		Collection<Comment> res= new ArrayList<Comment>();
-		res=commentRepository.findAllCommentsDeleted();
+
+	public Collection<Comment> findAllCommentsDeleted() {
+		Collection<Comment> res;
+
+		res = new ArrayList<Comment>();
+		res = commentRepository.findAllCommentsDeleted();
+
 		return res;
 	}
-	
-	public Collection<Comment> findAllCommentsNotDeleted(){
-		Collection<Comment> res= new ArrayList<Comment>();
-		res=commentRepository.findAllCommentsNotDeleted();
+
+	public Collection<Comment> findAllCommentsNotDeleted() {
+		Collection<Comment> res;
+
+		res = new ArrayList<Comment>();
+		res = commentRepository.findAllCommentsNotDeleted();
+
 		return res;
 	}
-	public Double findRatioOfCommentsOfUserInHilo(int idHilo){
-		Double res=0.0;
-		res=commentRepository.findRatioOfCommentsOfUserInHilo(idHilo, LoginService.getPrincipal().getId());
+
+	public Double findRatioOfCommentsOfUserInHilo(int idHilo) {
+		Double res;
+
+		res = 0.0;
+		res = commentRepository.findRatioOfCommentsOfUserInHilo(idHilo, LoginService.getPrincipal().getId());
 		return res;
 	}
 }

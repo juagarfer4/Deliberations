@@ -22,6 +22,7 @@ public class Rating extends DomainEntity{
 	
 
 	// Attributes -------------------------------------------------------------
+	
 	private Integer rate;
 	
 	@NotNull

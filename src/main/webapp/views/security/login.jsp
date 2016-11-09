@@ -44,9 +44,9 @@
 
 
 <%-- <a href="security/laws.do"><spring:message code="login.laws"></spring:message></a> --%>
-</br>
-</br>
-</br>
+<br/>
+<br/>
+<br/>
 <script type="text/javascript" src="scripts/login.js"></script>
 
 <link rel="stylesheet" href="styles/login.css" type="text/css">
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <!-- Button -->
                         <div class="col-sm-12 controls">
-                            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
+                            <button type="submit" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
         </div>  
     </div>
 </div>
-</br>
-</br>
-</br>
+<br/>
+<br/>
+<br/>
 
