@@ -1,3 +1,9 @@
+start transaction;
+
+create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
+
+create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
+
 -- phpMyAdmin SQL Dump
 -- version 4.5.0.2
 -- http://www.phpmyadmin.net
@@ -254,3 +260,5 @@ ALTER TABLE `useraccount_authorities`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+commit;

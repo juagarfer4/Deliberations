@@ -27,6 +27,7 @@ public class User extends DomainEntity {
 	}
 
 	// Attributes -------------------------------------------------------------
+
 	private String name;
 	private String surname;
 	private String email;
