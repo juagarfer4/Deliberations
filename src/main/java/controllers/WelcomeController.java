@@ -42,9 +42,6 @@ public class WelcomeController extends AbstractController {
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
 		result.addObject("moment", moment);
-		
-		//probando las cookie de autenticacíon ...
-		
 
 		return result;
 	}

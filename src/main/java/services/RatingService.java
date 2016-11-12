@@ -17,25 +17,34 @@ import security.LoginService;
 @Transactional
 public class RatingService {
 
-	// Managed repository
+	// Managed repository -----------------------------------------------------
+	
 	@Autowired
 	private RatingRepository ratingRepository;
 
-	// Supporting services
+	// Supporting services ----------------------------------------------------
+	
 	@Autowired
 	private UserService userService;
 
-	// Constructors
+	// Constructors -----------------------------------------------------------
+	
 	public RatingService() {
 		super();
 	}
 
-	// Simple CRUD methods
+	// Simple CRUD methods ----------------------------------------------------
+	
 	public Rating create() {
-		Rating res = new Rating();
-		User user=userService.findOneByPrincipal();
-		res.setUser(user);
-		return res;
+		Rating result;
+		User user;
+		
+		result = new Rating();
+		user=userService.findOneByPrincipal();
+		
+		result.setUser(user);
+		
+		return result;
 	}
 
 	public Rating findOne(int ratingId) {
@@ -54,23 +63,32 @@ public class RatingService {
 		ratingRepository.delete(rating);
 	}
 
-	// Other business methods
+	// Other business methods -------------------------------------------------
 
 	public Collection<Rating> findRatingsOfThread(int idThread){
-		Collection<Rating> res= new ArrayList<Rating>();
-		res=ratingRepository.findRatingsOfThread(idThread);
-		return res;
+		Collection<Rating> result;
+		
+		result = new ArrayList<Rating>();
+		result = ratingRepository.findRatingsOfThread(idThread);
+		
+		return result;
 	}
 	
 	public Collection<Rating> findRatingsOfUser(){
-		Collection<Rating> res= new ArrayList<Rating>();
-		res=ratingRepository.findRatingsOfUser(LoginService.getPrincipal().getId());
-		return res;
+		Collection<Rating> result;
+		
+		result = new ArrayList<Rating>();
+		result=ratingRepository.findRatingsOfUser(LoginService.getPrincipal().getId());
+		
+		return result;
 	}
 
 	public Integer totalRating(int idRate){
-		Integer res=0;
-		res=ratingRepository.totalRating(idRate);
-		return res;
+		Integer result;
+		
+		result = 0;
+		result = ratingRepository.totalRating(idRate);
+		
+		return result;
 	}
 }

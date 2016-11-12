@@ -97,11 +97,12 @@ public class UserController extends AbstractController {
 		} else {
 
 			// Se monta el token a verificar para el usuario
+			
 			tokenToVerify = loginService.verifyToken(userAccount);
 
 			// Se recupera la respuesta a la petición
 
-			response = objectMapper.readValue(new URL("http://localhost/Auth/api/checkToken?token=" + tokenToVerify),
+			response = objectMapper.readValue(new URL("http://www.egcaj.tk/Auth/api/checkToken?token=" + tokenToVerify),
 					Token.class);
 
 			// Se comprueba que la respuesta recibida sea válida
@@ -112,6 +113,9 @@ public class UserController extends AbstractController {
 				try {
 					// Se comprueba que el usuario que accede exista ya en
 					// Deliberaciones y se inicia sesión
+					DaoAuthenticationProvider authenticator;
+					Authentication authentication;
+					
 					Assert.isTrue(loginService.loadUserByUsername(userAccount.getUsername()).getPassword()
 							.equals(md5.encodePassword(userAccount.getPassword(), null)));
 
@@ -120,20 +124,36 @@ public class UserController extends AbstractController {
 
 					token.setDetails(new WebAuthenticationDetails(request));
 
-					DaoAuthenticationProvider authenticator = new DaoAuthenticationProvider();
+					authenticator = new DaoAuthenticationProvider();
 
 					authenticator.setUserDetailsService(userDetailsService);
 
-					Authentication authentication = authenticator.authenticate(token);
+					authentication = authenticator.authenticate(token);
 
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 
 				} catch (Exception e) {
-					// En caso de no existir en Deliberaciones se le da de alta
+					// En caso de no existir en Deliberaciones se le da de alta en 
+					// Deliberaciones y se inicia sesión
+					User usuario;
+					UserAccount userAccountUsuario;
+					DaoAuthenticationProvider authenticator;
+					Authentication authentication;
+					
+					usuario = userService.create(userAccount.getUsername());
+					usuario = userService.save(usuario);
+					userAccountUsuario = usuario.getUserAccount();
+					
+					UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+							userAccountUsuario.getUsername(), userAccountUsuario.getPassword(), null);
 
-					User usuario = userService.create(userAccount.getUsername());
+					token.setDetails(new WebAuthenticationDetails(request));
 
-					userService.save(usuario);
+					authenticator = new DaoAuthenticationProvider();
+					authenticator.setUserDetailsService(userDetailsService);
+					authentication = authenticator.authenticate(token);
+
+					SecurityContextHolder.getContext().setAuthentication(authentication);
 
 				}
 

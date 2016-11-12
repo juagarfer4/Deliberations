@@ -18,8 +18,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
-</br>
-</br>
+<br/>
+<br/>
 <div class="container">
 	<h1><spring:message code="dashboard.threadMostComments" /></h1>
 	<div class="table-responsive">
@@ -80,5 +80,5 @@
 	</display:table >
 	</div>
 </div>
-</br>
-</br>
+<br/>
+<br/>
